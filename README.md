@@ -26,13 +26,27 @@ Une application de rencontres moderne construite avec **Next.js 14**, **Prisma**
 
 ## Démarrage Rapide
 
-### Prérequis
+### Vous êtes débutant ou n'avez pas Docker ?
+
+**SUIVEZ CE GUIDE :** [Guide Débutant Sans Docker](./documentation/07-guide-debutant-sans-docker.md)
+
+Ce guide vous explique TOUT étape par étape (30-45 minutes) :
+- Comment créer votre base de données avec Neon (gratuit, sans Docker)
+- Comment configurer Cloudinary pour les images
+- Comment configurer Pusher pour la messagerie temps réel
+- Comment configurer Resend pour les emails
+- Comment créer et remplir le fichier `.env`
+- Comment démarrer l'application
+
+### Vous avez Docker et vous êtes à l'aise ?
+
+#### Prérequis
 
 - **Node.js** 18+ ([Télécharger](https://nodejs.org/))
-- **PostgreSQL** (via [Docker](https://www.docker.com/products/docker-desktop/) ou [installation directe](https://www.postgresql.org/download/windows/))
+- **Docker Desktop** ([Télécharger](https://www.docker.com/products/docker-desktop/))
 - **npm** ou **yarn**
 
-### Installation en 3 étapes
+#### Installation en 3 étapes
 
 #### Étape 1 : Créer le fichier `.env`
 
@@ -91,6 +105,8 @@ La documentation détaillée est disponible dans le dossier [`documentation/`](.
 | **[Scripts d'Automatisation](./documentation/03-scripts-automatisation.md)** | Utilisation des scripts et commandes |
 | **[Architecture du Projet](./documentation/04-architecture-projet.md)** | Structure du code et patterns |
 | **[Troubleshooting](./documentation/05-troubleshooting.md)** | Résolution des problèmes courants |
+| **[Docker Compose](./documentation/06-docker-compose.md)** | Configuration Docker Compose avec PostgreSQL |
+| **[Guide Débutant Sans Docker](./documentation/07-guide-debutant-sans-docker.md)** | Guide complet étape par étape pour débutants |
 
 ---
 

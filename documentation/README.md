@@ -13,14 +13,28 @@ Bienvenue dans la documentation complète du projet **Next Match** !
 | [03 - Scripts d'Automatisation](./03-scripts-automatisation.md) | Utilisation des scripts et commandes disponibles |
 | [04 - Architecture du Projet](./04-architecture-projet.md) | Structure du code et patterns utilisés |
 | [05 - Troubleshooting](./05-troubleshooting.md) | Résolution des problèmes courants |
+| [06 - Docker Compose](./06-docker-compose.md) | Configuration et utilisation de Docker Compose avec PostgreSQL |
+| [07 - Guide Débutant Sans Docker](./07-guide-debutant-sans-docker.md) | Configuration complète étape par étape avec Neon, Cloudinary, Pusher, Resend |
 
 ---
 
 ## Démarrage rapide
 
-### Nouveau sur le projet ?
+### Vous êtes débutant ou n'avez pas Docker ?
 
-1. **Lisez d'abord :** [01 - Guide de Démarrage](./01-guide-demarrage.md)
+**RECOMMANDÉ :** Suivez le [Guide Débutant Sans Docker](./07-guide-debutant-sans-docker.md)
+
+Ce guide vous explique TOUT en détail, étape par étape :
+- Créer votre base de données avec Neon
+- Configurer Cloudinary pour les images
+- Configurer Pusher pour la messagerie
+- Configurer Resend pour les emails
+- Créer le fichier `.env`
+- Démarrer l'application
+
+### Vous avez Docker et êtes à l'aise ?
+
+1. **Lisez :** [01 - Guide de Démarrage](./01-guide-demarrage.md)
 2. **Configurez :** [02 - Configuration Environnement](./02-configuration-environnement.md)
 3. **Lancez :** Exécutez `setup.ps1` ou `setup.bat`
 4. **Démarrez :** `npm run dev`
@@ -87,7 +101,9 @@ documentation/
 ├── 02-configuration-environnement.md  # Variables d'environnement
 ├── 03-scripts-automatisation.md       # Scripts et commandes
 ├── 04-architecture-projet.md          # Architecture et stack technique
-└── 05-troubleshooting.md              # Dépannage
+├── 05-troubleshooting.md              # Dépannage
+├── 06-docker-compose.md               # Docker Compose et PostgreSQL
+└── 07-guide-debutant-sans-docker.md   # Guide complet pour débutants sans Docker
 ```
 
 ---
