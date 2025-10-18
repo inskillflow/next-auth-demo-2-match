@@ -1,0 +1,156 @@
+# Documentation Next Match
+
+Bienvenue dans la documentation complète du projet **Next Match** !
+
+---
+
+## Table des matières
+
+| Document | Description |
+|----------|-------------|
+| [01 - Guide de Démarrage](./01-guide-demarrage.md) | Installation et premier lancement du projet |
+| [02 - Configuration Environnement](./02-configuration-environnement.md) | Configuration du fichier `.env` et services externes |
+| [03 - Scripts d'Automatisation](./03-scripts-automatisation.md) | Utilisation des scripts et commandes disponibles |
+| [04 - Architecture du Projet](./04-architecture-projet.md) | Structure du code et patterns utilisés |
+| [05 - Troubleshooting](./05-troubleshooting.md) | Résolution des problèmes courants |
+
+---
+
+## Démarrage rapide
+
+### Nouveau sur le projet ?
+
+1. **Lisez d'abord :** [01 - Guide de Démarrage](./01-guide-demarrage.md)
+2. **Configurez :** [02 - Configuration Environnement](./02-configuration-environnement.md)
+3. **Lancez :** Exécutez `setup.ps1` ou `setup.bat`
+4. **Démarrez :** `npm run dev`
+
+### Un problème ?
+
+Consultez : [05 - Troubleshooting](./05-troubleshooting.md)
+
+---
+
+## À propos du projet
+
+**Next Match** est une application de rencontres moderne construite avec :
+
+- **Next.js 14** - Framework React avec App Router
+- **PostgreSQL** - Base de données relationnelle
+- **NextAuth v5** - Authentification complète
+- **Cloudinary** - Gestion d'images
+- **Pusher** - Messagerie temps réel
+- **Tailwind CSS** & **NextUI** - Interface moderne
+
+---
+
+## Fonctionnalités principales
+
+- Inscription et connexion (email/password, Google, GitHub)
+- Profils utilisateurs avec photos
+- Système de likes bidirectionnel
+- Messagerie instantanée
+- Présence en ligne
+- Panel d'administration
+- Modération de contenu
+- Emails de vérification
+
+---
+
+## Commandes essentielles
+
+```powershell
+# Développement
+npm run dev
+
+# Production
+npm run build
+npm start
+
+# Base de données
+npx prisma studio       # Interface graphique
+npx prisma migrate dev  # Nouvelle migration
+
+# Docker
+docker compose up -d    # Démarrer PostgreSQL
+docker compose down     # Arrêter
+```
+
+---
+
+## Structure de la documentation
+
+```
+documentation/
+├── README.md                           # Ce fichier
+├── 01-guide-demarrage.md              # Installation et premiers pas
+├── 02-configuration-environnement.md  # Variables d'environnement
+├── 03-scripts-automatisation.md       # Scripts et commandes
+├── 04-architecture-projet.md          # Architecture et stack technique
+└── 05-troubleshooting.md              # Dépannage
+```
+
+---
+
+## Liens utiles
+
+### Documentation officielle
+- [Next.js](https://nextjs.org/docs)
+- [Prisma](https://www.prisma.io/docs)
+- [NextAuth](https://next-auth.js.org)
+- [Tailwind CSS](https://tailwindcss.com/docs)
+- [NextUI](https://nextui.org)
+
+### Services externes
+- [Cloudinary](https://cloudinary.com)
+- [Pusher](https://pusher.com)
+- [Resend](https://resend.com)
+- [Supabase](https://supabase.com) (alternative PostgreSQL)
+
+### Outils
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- [PostgreSQL](https://www.postgresql.org/download/windows/)
+- [VS Code](https://code.visualstudio.com)
+
+---
+
+## Contribution
+
+Pour contribuer au projet :
+
+1. Lisez d'abord [04 - Architecture](./04-architecture-projet.md)
+2. Suivez les conventions de code existantes
+3. Testez vos modifications
+4. Documentez les nouvelles fonctionnalités
+
+---
+
+## Support
+
+Besoin d'aide ?
+
+1. Consultez [05 - Troubleshooting](./05-troubleshooting.md)
+2. Vérifiez les [Issues GitHub](../../issues)
+3. Lisez la documentation des technologies utilisées
+
+---
+
+## Versions
+
+- **Next.js** : 14.2.1
+- **React** : 18
+- **Node.js** : >= 18
+- **PostgreSQL** : 13+
+- **Prisma** : 5.11.0
+
+---
+
+## Licence
+
+Ce projet est à but éducatif.
+
+---
+
+**Bonne lecture et bon développement !**
+
+*Dernière mise à jour : Octobre 2024*
