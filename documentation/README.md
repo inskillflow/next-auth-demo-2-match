@@ -15,6 +15,11 @@ Bienvenue dans la documentation complète du projet **Next Match** !
 | [05 - Troubleshooting](./05-troubleshooting.md) | Résolution des problèmes courants |
 | [06 - Docker Compose](./06-docker-compose.md) | Configuration et utilisation de Docker Compose avec PostgreSQL |
 | [07 - Guide Débutant Sans Docker](./07-guide-debutant-sans-docker.md) | Configuration complète étape par étape avec Neon, Cloudinary, Pusher, Resend |
+| [08 - Troubleshooting Session](./08-troubleshooting-session.md) | Solutions détaillées de tous les problèmes rencontrés avec preset Cloudinary |
+| [09 - Troubleshooting Emails Resend](./09-troubleshooting-emails-resend.md) | Configuration complète de Resend et résolution des problèmes d'envoi d'emails |
+| [10 - Analyse Stack MVP](./10-analyse-stack-mvp.md) | Évaluation détaillée des services pour un MVP professionnel et alternatives |
+| [11 - Optimisation Performance](./11-optimisation-performance-latence.md) | Résolution des problèmes de latence et optimisation de la connexion base de données |
+| [12 - Comparaison Neon vs Supabase](./12-comparaison-neon-vs-supabase.md) | Analyse complète des performances, fonctionnalités et guide de migration |
 
 ---
 
@@ -103,7 +108,12 @@ documentation/
 ├── 04-architecture-projet.md          # Architecture et stack technique
 ├── 05-troubleshooting.md              # Dépannage
 ├── 06-docker-compose.md               # Docker Compose et PostgreSQL
-└── 07-guide-debutant-sans-docker.md   # Guide complet pour débutants sans Docker
+├── 07-guide-debutant-sans-docker.md   # Guide complet pour débutants sans Docker
+├── 08-troubleshooting-session.md      # Résolution détaillée des problèmes (preset, cluster, etc.)
+├── 09-troubleshooting-emails-resend.md # Configuration Resend et envoi d'emails
+├── 10-analyse-stack-mvp.md            # Évaluation des services pour un MVP professionnel
+├── 11-optimisation-performance-latence.md # Optimisation performance et résolution latence BDD
+└── 12-comparaison-neon-vs-supabase.md # Comparaison détaillée Neon vs Supabase avec migration
 ```
 
 ---

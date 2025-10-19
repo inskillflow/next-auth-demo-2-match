@@ -107,6 +107,11 @@ La documentation détaillée est disponible dans le dossier [`documentation/`](.
 | **[Troubleshooting](./documentation/05-troubleshooting.md)** | Résolution des problèmes courants |
 | **[Docker Compose](./documentation/06-docker-compose.md)** | Configuration Docker Compose avec PostgreSQL |
 | **[Guide Débutant Sans Docker](./documentation/07-guide-debutant-sans-docker.md)** | Guide complet étape par étape pour débutants |
+| **[Troubleshooting Session](./documentation/08-troubleshooting-session.md)** | Toutes les solutions détaillées (preset Cloudinary, cluster Pusher, etc.) |
+| **[Troubleshooting Emails](./documentation/09-troubleshooting-emails-resend.md)** | Configuration Resend et résolution des problèmes d'envoi d'emails |
+| **[Analyse Stack MVP](./documentation/10-analyse-stack-mvp.md)** | Évaluation complète des services pour un MVP professionnel et alternatives |
+| **[Optimisation Performance](./documentation/11-optimisation-performance-latence.md)** | Résolution des problèmes de latence et optimisation base de données |
+| **[Neon vs Supabase](./documentation/12-comparaison-neon-vs-supabase.md)** | Comparaison complète des performances et guide de migration |
 
 ---
 

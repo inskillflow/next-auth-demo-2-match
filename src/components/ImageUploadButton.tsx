@@ -14,7 +14,7 @@ export default function ImageUploadButton({onUploadImage}: Props) {
       options={{maxFiles: 1}}
       onSuccess={onUploadImage}
       signatureEndpoint='/api/sign-image'
-      uploadPreset='nm-demo'
+      uploadPreset='nextmatch'
       className={`flex items-center gap-2 border-2 border-secondary text-secondary 
         rounded-lg py-2 px-4 hover:bg-secondary/10`}
     >
