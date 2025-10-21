@@ -82,38 +82,38 @@ flowchart TB
 
 ```mermaid
 sequenceDiagram
-    actor U as 👤 Utilisateur
-    participant F as 📱 RegisterForm<br/>(Client)
-    participant SA as ⚙️ Server Action<br/>registerUser
-    participant Z as ✅ Zod Validation
-    participant B as 🔐 bcrypt
-    participant P as 🗄️ Prisma
-    participant DB as 🐘 PostgreSQL<br/>(Supabase)
-    participant R as 📧 Resend
+    actor U as Utilisateur
+    participant F as RegisterForm (Client)
+    participant SA as Server Action registerUser
+    participant Z as Zod Validation
+    participant B as bcrypt
+    participant P as Prisma
+    participant DB as PostgreSQL (Supabase)
+    participant R as Resend
     
-    rect rgb(225, 245, 255)
+    rect rgb(33, 150, 243)
         Note over U,F: ÉTAPE 1 : Remplissage Formulaire
         U->>F: Remplit name, email, password
         U->>F: Remplit gender, dateOfBirth, city, etc.
         U->>F: Clique "Submit"
     end
     
-    rect rgb(255, 243, 224)
+    rect rgb(255, 152, 0)
         Note over F,SA: ÉTAPE 2 : Envoi au Serveur
         F->>SA: POST registerUser(data)
-        Note over SA: data = {<br/>name, email, password,<br/>gender, dateOfBirth,<br/>city, country, description<br/>}
+        Note over SA: data = name, email, password, gender, dateOfBirth, city, country, description
     end
     
-    rect rgb(255, 243, 205)
+    rect rgb(255, 193, 7)
         Note over SA,Z: ÉTAPE 3 : Validation
         SA->>Z: combinedRegisterSchema.safeParse(data)
         Z->>Z: Vérifie email format
         Z->>Z: Vérifie password >= 6 chars
         Z->>Z: Vérifie age >= 18 ans
-        Z-->>SA: ✅ validated.success = true
+        Z-->>SA: validated.success = true
     end
     
-    rect rgb(255, 224, 178)
+    rect rgb(255, 87, 34)
         Note over SA,B: ÉTAPE 4 : Hash Password
         SA->>B: bcrypt.hash(password, 10)
         B->>B: Génère salt
@@ -121,36 +121,36 @@ sequenceDiagram
         B-->>SA: hashedPassword
     end
     
-    rect rgb(225, 245, 255)
+    rect rgb(103, 58, 183)
         Note over SA,DB: ÉTAPE 5 : Vérification Email Unique
-        SA->>P: prisma.user.findUnique({where: {email}})
-        P->>DB: SELECT * FROM "User" WHERE email = ?
+        SA->>P: prisma.user.findUnique where email
+        P->>DB: SELECT * FROM User WHERE email = ?
         DB-->>P: null (n'existe pas)
         P-->>SA: null
     end
     
-    rect rgb(200, 230, 201)
+    rect rgb(76, 175, 80)
         Note over SA,DB: ÉTAPE 6 : Création User + Member
-        SA->>P: prisma.user.create({<br/>data: {..., member: {create: {...}}}<br/>})
+        SA->>P: prisma.user.create data + member.create
         P->>DB: BEGIN TRANSACTION
-        P->>DB: INSERT INTO "User" VALUES (...)
-        P->>DB: INSERT INTO "Member" VALUES (...)
+        P->>DB: INSERT INTO User VALUES
+        P->>DB: INSERT INTO Member VALUES
         P->>DB: COMMIT
         DB-->>P: User + Member créés
         P-->>SA: user object
     end
     
-    rect rgb(255, 235, 238)
+    rect rgb(233, 30, 99)
         Note over SA,R: ÉTAPE 7 : Email Vérification
         SA->>SA: generateToken(email, VERIFICATION)
-        SA->>DB: INSERT INTO "Token" (token, expires, email)
+        SA->>DB: INSERT INTO Token
         SA->>R: sendVerificationEmail(email, token)
-        R->>U: 📧 Email avec lien
+        R->>U: Email avec lien
     end
     
-    rect rgb(200, 230, 201)
+    rect rgb(0, 150, 136)
         Note over SA,F: ÉTAPE 8 : Réponse
-        SA-->>F: {status: 'success', data: user}
+        SA-->>F: status: success, data: user
         F->>F: router.push('/register/success')
     end
 ```
