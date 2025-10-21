@@ -112,6 +112,10 @@ La documentation détaillée est disponible dans le dossier [`documentation/`](.
 | **[Analyse Stack MVP](./documentation/10-analyse-stack-mvp.md)** | Évaluation complète des services pour un MVP professionnel et alternatives |
 | **[Optimisation Performance](./documentation/11-optimisation-performance-latence.md)** | Résolution des problèmes de latence et optimisation base de données |
 | **[Neon vs Supabase](./documentation/12-comparaison-neon-vs-supabase.md)** | Comparaison complète des performances et guide de migration |
+| **[Migration vers Supabase](./documentation/13-migration-neon-vers-supabase.md)** | Guide étape par étape pour migrer de Neon vers Supabase |
+| **[Services Emails](./documentation/14-comparaison-services-emails.md)** | Comparaison complète Resend vs Postmark vs SendGrid vs autres |
+| **[Services Temps Réel](./documentation/15-comparaison-services-temps-reel.md)** | Analyse Pusher vs Ably vs Supabase Realtime avec migrations |
+| **[Diagrammes Architecture](./documentation/16-diagrammes-architecture.md)** | Diagrammes Mermaid visuels de toute l'architecture système |
 
 ---
 

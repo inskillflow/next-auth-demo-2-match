@@ -20,6 +20,10 @@ Bienvenue dans la documentation complète du projet **Next Match** !
 | [10 - Analyse Stack MVP](./10-analyse-stack-mvp.md) | Évaluation détaillée des services pour un MVP professionnel et alternatives |
 | [11 - Optimisation Performance](./11-optimisation-performance-latence.md) | Résolution des problèmes de latence et optimisation de la connexion base de données |
 | [12 - Comparaison Neon vs Supabase](./12-comparaison-neon-vs-supabase.md) | Analyse complète des performances, fonctionnalités et guide de migration |
+| [13 - Migration Neon vers Supabase](./13-migration-neon-vers-supabase.md) | Guide étape par étape pour migrer de Neon vers Supabase |
+| [14 - Comparaison Services Emails](./14-comparaison-services-emails.md) | Analyse complète des meilleurs services d'envoi d'emails (Resend, Postmark, etc.) |
+| [15 - Comparaison Services Temps Réel](./15-comparaison-services-temps-reel.md) | Analyse Pusher vs Ably vs Supabase Realtime avec guides de migration |
+| [16 - Diagrammes Architecture](./16-diagrammes-architecture.md) | Diagrammes Mermaid complets de l'architecture, flux de données et déploiement |
 
 ---
 
@@ -113,7 +117,11 @@ documentation/
 ├── 09-troubleshooting-emails-resend.md # Configuration Resend et envoi d'emails
 ├── 10-analyse-stack-mvp.md            # Évaluation des services pour un MVP professionnel
 ├── 11-optimisation-performance-latence.md # Optimisation performance et résolution latence BDD
-└── 12-comparaison-neon-vs-supabase.md # Comparaison détaillée Neon vs Supabase avec migration
+├── 12-comparaison-neon-vs-supabase.md # Comparaison détaillée Neon vs Supabase avec migration
+├── 13-migration-neon-vers-supabase.md # Guide complet de migration étape par étape
+├── 14-comparaison-services-emails.md  # Comparaison complète des services d'envoi d'emails
+├── 15-comparaison-services-temps-reel.md # Analyse Pusher vs Ably vs Supabase Realtime
+└── 16-diagrammes-architecture.md      # Diagrammes Mermaid de l'architecture complète
 ```
 
 ---
