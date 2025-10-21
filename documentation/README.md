@@ -30,6 +30,9 @@ Bienvenue dans la documentation complète du projet **Next Match** !
 | [20 - Système d'Authentification](./20-systeme-authentification.md) | Documentation complète du système d'authentification NextAuth.js avec tous les flux |
 | [21 - Flux Complet Authentification](./21-flux-complet-authentification.md) | Analyse détaillée avec extraits de code : POST users, sessions JWT, et gestion base de données unique |
 | [22 - Comprendre l'Authentification (Pédagogique)](./22-comprendre-authentification-pedagogique.md) | Guide ultra-pédagogique : JWT, cookies, refresh tokens, et comment reproduire le système étape par étape |
+| [23 - Évaluation Architecture Authentification](./23-evaluation-architecture-authentification.md) | Analyse complète : est-ce correct ? Points forts, améliorations, comparaisons, et action plan |
+| [24 - Équivalence Clerk vs NextAuth](./24-equivalence-clerk-vs-nextauth.md) | Comparaison complète avec code : comment ce serait avec Clerk, migration guide, coûts, et recommandations |
+| [25 - Architecture Clerk : Synchronisation Prisma](./25-architecture-clerk-synchronisation-prisma.md) | Guide complet : webhooks, liaison User Clerk ↔ Prisma, gestion rôles, et flux de données détaillé |
 
 ---
 
