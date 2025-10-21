@@ -458,62 +458,53 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
 ```mermaid
 sequenceDiagram
-    actor U as 👤 Utilisateur
-    participant B as 🌐 Browser
-    participant N as ⚡ Next.js Server
-    participant NA as 🔐 NextAuth
-    participant P as 🗄️ Prisma
-    participant DB as 🐘 PostgreSQL
+    autonumber
+    actor U as Utilisateur
+    participant B as Browser
+    participant N as Next.js Server
+    participant NA as NextAuth
+    participant P as Prisma
+    participant DB as PostgreSQL
     
-    rect rgb(225, 245, 255)
-        Note over U,B: CONNEXION (Credentials)
-        U->>B: Formulaire login<br/>email + password
-        B->>N: POST signInUser(data)
-        N->>P: prisma.user.findUnique({where: {email}})
-        P->>DB: SELECT * FROM "User" WHERE email = ?
-        DB-->>P: User object
-        P-->>N: user
-        N->>N: bcrypt.compare(password, passwordHash)
-        Note over N: ✅ Password correct
+    Note over U,B: === PHASE 1 : CONNEXION ===
+    U->>B: Formulaire login (email + password)
+    B->>N: POST signInUser(data)
+    N->>P: prisma.user.findUnique where email
+    P->>DB: SELECT * FROM User WHERE email = ?
+    DB-->>P: User object
+    P-->>N: user
+    N->>N: bcrypt.compare(password, passwordHash)
+    Note right of N: Password correct
+    
+    Note over N,NA: === PHASE 2 : GÉNÉRATION JWT ===
+    N->>NA: signIn('credentials', email, password)
+    NA->>NA: Callback jwt avec user
+    Note right of NA: token = sub, email, profileComplete, role, iat, exp
+    NA->>NA: Signe JWT avec NEXTAUTH_SECRET
+    Note right of NA: JWT signé en 3 parties
+    
+    Note over NA,B: === PHASE 3 : CRÉATION COOKIE ===
+    NA->>B: Set-Cookie next-auth.session-token (HttpOnly, Secure, SameSite)
+    B->>B: Stocke cookie
+    Note right of B: Cookie inaccessible par JavaScript, envoyé automatiquement
+    
+    Note over B,N: === PHASE 4 : REQUÊTES SUIVANTES ===
+    loop Chaque requête
+        B->>N: GET /members avec Cookie JWT
+        N->>NA: auth() lit le JWT
+        NA->>NA: Vérifie signature
+        NA->>NA: Vérifie expiration
+        NA->>NA: Callback session avec token
+        NA-->>N: session avec user id, email, role
+        N-->>B: Page /members avec données
     end
     
-    rect rgb(255, 243, 224)
-        Note over N,NA: GÉNÉRATION JWT
-        N->>NA: signIn('credentials', {email, password})
-        NA->>NA: Callback jwt({ user })
-        Note over NA: token = {<br/>sub: user.id,<br/>email: user.email,<br/>profileComplete: true,<br/>role: 'MEMBER',<br/>iat: timestamp,<br/>exp: timestamp + 30d<br/>}
-        NA->>NA: Signe JWT avec NEXTAUTH_SECRET
-        Note over NA: JWT signé :<br/>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.<br/>eyJzdWIiOiJjaWQxMjMiLCJlbWFpbCI6ImpvaG4u...<br/>SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
-    end
-    
-    rect rgb(200, 230, 201)
-        Note over NA,B: CRÉATION COOKIE
-        NA->>B: Set-Cookie: next-auth.session-token=eyJhbGc...<br/>HttpOnly; Secure; SameSite=Lax; Path=/
-        B->>B: Stocke cookie
-        Note over B: Cookie stocké dans le browser<br/>❌ PAS accessible par JavaScript<br/>✅ Envoyé automatiquement à chaque requête
-    end
-    
-    rect rgb(255, 235, 238)
-        Note over B,N: REQUÊTES SUIVANTES
-        loop Chaque requête
-            B->>N: GET /members<br/>Cookie: next-auth.session-token=eyJhbGc...
-            N->>NA: auth() - Lecture JWT
-            NA->>NA: Vérifie signature JWT
-            NA->>NA: Vérifie expiration
-            NA->>NA: Callback session({ token })
-            NA-->>N: session = {<br/>user: {<br/>id, email,<br/>profileComplete,<br/>role<br/>}<br/>}
-            N-->>B: Page /members avec données user
-        end
-    end
-    
-    rect rgb(255, 205, 210)
-        Note over U,B: DÉCONNEXION
-        U->>B: Clique "Logout"
-        B->>N: POST signOut()
-        N->>B: Set-Cookie: next-auth.session-token=; Max-Age=0
-        B->>B: Supprime cookie
-        Note over B: Cookie supprimé<br/>Session terminée
-    end
+    Note over U,B: === PHASE 5 : DÉCONNEXION ===
+    U->>B: Clique Logout
+    B->>N: POST signOut()
+    N->>B: Set-Cookie avec Max-Age=0
+    B->>B: Supprime cookie
+    Note right of B: Session terminée
 ```
 
 ---
