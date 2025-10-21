@@ -19,81 +19,125 @@ Ce document présente l'arborescence complète du projet avec le rôle détaill�
 
 ## Architecture Globale du Projet
 
+### Vue Racine
+
 ```mermaid
 flowchart TD
-    Root["📁 PROJET: 01-next-match-main-1"]
+    Root["📁 01-next-match-main-1<br/>RACINE DU PROJET"]
     
-    Root --> SRC["📁 SRC<br/>Code source principal"]
+    Root --> SRC["📁 SRC<br/>━━━━━━━━━━━━━<br/>Code source principal"]
+    Root --> PRISMA["📁 PRISMA<br/>━━━━━━━━━━━━━<br/>Base de données"]
+    Root --> PUBLIC["📁 PUBLIC<br/>━━━━━━━━━━━━━<br/>Fichiers statiques"]
+    Root --> DOC["📁 DOCUMENTATION<br/>━━━━━━━━━━━━━<br/>17 guides complets"]
     
-    SRC --> APP["📁 APP<br/>Pages et routes Next.js 14"]
-    SRC --> COMP["📁 COMPONENTS<br/>Composants UI réutilisables"]
-    SRC --> LIB["📁 LIB<br/>Services et utilitaires"]
-    SRC --> HOOKS["📁 HOOKS<br/>Hooks React personnalisés"]
+    style Root fill:#1f2937,stroke:#111827,stroke-width:6px,color:#fff,font-size:20px
+    style SRC fill:#2563eb,stroke:#1e40af,stroke-width:5px,color:#fff,font-size:18px
+    style PRISMA fill:#7c3aed,stroke:#6d28d9,stroke-width:5px,color:#fff,font-size:18px
+    style PUBLIC fill:#059669,stroke:#047857,stroke-width:5px,color:#fff,font-size:18px
+    style DOC fill:#d97706,stroke:#b45309,stroke-width:5px,color:#fff,font-size:18px
+```
+
+### Dossier src/
+
+```mermaid
+flowchart TD
+    SRC["📁 SRC"]
     
-    APP --> AUTH_G["📁 (auth)<br/>Routes authentification"]
-    APP --> MEMBERS_G["📁 members<br/>Pages profils membres"]
-    APP --> ACTIONS_G["📁 actions<br/>Server Actions"]
-    APP --> API_G["📁 api<br/>API Routes"]
+    SRC --> APP["📁 APP<br/>━━━━━━━━━━━━━<br/>Pages et routes<br/>Next.js App Router"]
+    SRC --> COMPONENTS["📁 COMPONENTS<br/>━━━━━━━━━━━━━<br/>Composants React<br/>UI réutilisables"]
+    SRC --> LIB["📁 LIB<br/>━━━━━━━━━━━━━<br/>Services externes<br/>Prisma, Cloudinary, Pusher"]
+    SRC --> HOOKS["📁 HOOKS<br/>━━━━━━━━━━━━━<br/>Hooks personnalisés<br/>State management"]
     
-    Root --> PRISMA_R["📁 PRISMA<br/>Base de données"]
+    style SRC fill:#1f2937,stroke:#111827,stroke-width:6px,color:#fff,font-size:20px
+    style APP fill:#059669,stroke:#047857,stroke-width:5px,color:#fff,font-size:18px
+    style COMPONENTS fill:#2563eb,stroke:#1e40af,stroke-width:5px,color:#fff,font-size:18px
+    style LIB fill:#d97706,stroke:#b45309,stroke-width:5px,color:#fff,font-size:18px
+    style HOOKS fill:#db2777,stroke:#be185d,stroke-width:5px,color:#fff,font-size:18px
+```
+
+### Fichiers Configuration Racine
+
+```mermaid
+flowchart LR
+    ENV["📄 .env<br/>━━━━━━━━━━━━━<br/>VARIABLES SECRÈTES<br/>⚠️ Jamais commiter"]
+    PACKAGE["📄 package.json<br/>━━━━━━━━━━━━━<br/>Dépendances npm<br/>Scripts projet"]
+    TSCONFIG["📄 tsconfig.json<br/>━━━━━━━━━━━━━<br/>Config TypeScript<br/>Paths aliases"]
     
-    PRISMA_R --> SCHEMA["📄 schema.prisma<br/>Schéma BDD 7 models"]
-    PRISMA_R --> SEED["📄 seed.ts<br/>Données de test"]
-    
-    Root --> PUBLIC_R["📁 PUBLIC<br/>Assets statiques"]
-    Root --> DOC_R["📁 DOCUMENTATION<br/>17 guides complets"]
-    
-    Root --> ENV_R["📄 .env<br/>VARIABLES SECRÈTES"]
-    Root --> PACKAGE_R["📄 package.json<br/>Dépendances npm"]
-    
-    style Root fill:#1f2937,stroke:#111827,stroke-width:5px,color:#fff,font-size:18px
-    style SRC fill:#2563eb,stroke:#1e40af,stroke-width:4px,color:#fff,font-size:16px
-    style APP fill:#059669,stroke:#047857,stroke-width:3px,color:#fff
-    style LIB fill:#d97706,stroke:#b45309,stroke-width:3px,color:#fff
-    style PRISMA_R fill:#7c3aed,stroke:#6d28d9,stroke-width:3px,color:#fff
-    style ENV_R fill:#dc2626,stroke:#b91c1c,stroke-width:3px,color:#fff
+    style ENV fill:#dc2626,stroke:#b91c1c,stroke-width:5px,color:#fff,font-size:18px
+    style PACKAGE fill:#2563eb,stroke:#1e40af,stroke-width:5px,color:#fff,font-size:18px
+    style TSCONFIG fill:#0ea5e9,stroke:#0369a1,stroke-width:5px,color:#fff,font-size:18px
 ```
 
 ---
 
 ## Dossier src/app - Routes et Pages
 
-### Structure Complète
+### Routes Authentification
 
 ```mermaid
-flowchart TD
-    APP["📁 SRC/APP<br/>Routes et Pages Next.js"]
+flowchart LR
+    AUTH["📁 app/(auth)<br/>━━━━━━━━━━━━━<br/>AUTHENTIFICATION"]
     
-    APP --> AUTH["📁 AUTH<br/>Authentification"]
-    APP --> MEMBERS["📁 MEMBERS<br/>Profils membres"]
-    APP --> ACTIONS["📁 ACTIONS<br/>Server Actions"]
-    APP --> API["📁 API<br/>API Routes"]
+    AUTH --> LOGIN["📄 login<br/>Connexion"]
+    AUTH --> REGISTER["📄 register<br/>Inscription"]
+    AUTH --> VERIFY["📄 verify-email<br/>Vérification"]
+    AUTH --> FORGOT["📄 forgot-password<br/>Mot de passe oublié"]
     
-    AUTH --> A1["📄 login - Page connexion"]
-    AUTH --> A2["📄 register - Inscription"]
-    AUTH --> A3["📄 verify-email - Vérif email"]
+    style AUTH fill:#7c3aed,stroke:#6d28d9,stroke-width:6px,color:#fff,font-size:20px
+    style LOGIN fill:#2563eb,stroke:#1e40af,stroke-width:4px,color:#fff,font-size:16px
+    style REGISTER fill:#2563eb,stroke:#1e40af,stroke-width:4px,color:#fff,font-size:16px
+    style VERIFY fill:#2563eb,stroke:#1e40af,stroke-width:4px,color:#fff,font-size:16px
+    style FORGOT fill:#2563eb,stroke:#1e40af,stroke-width:4px,color:#fff,font-size:16px
+```
+
+### Routes Membres
+
+```mermaid
+flowchart LR
+    MEMBERS["📁 app/members<br/>━━━━━━━━━━━━━<br/>PROFILS MEMBRES"]
     
-    MEMBERS --> M1["📄 page.tsx - Liste tous membres"]
-    MEMBERS --> M2["📁 [userId] - Profil dynamique"]
-    MEMBERS --> M3["📁 edit - Édition profil"]
+    MEMBERS --> LIST["📄 page.tsx<br/>Liste profils"]
+    MEMBERS --> USERID["📁 [userId]<br/>Profil dynamique"]
+    MEMBERS --> EDIT["📁 edit<br/>Édition"]
     
-    M2 --> M2A["📄 chat - Messagerie 1-to-1"]
-    M2 --> M2B["📄 photos - Galerie photos"]
+    style MEMBERS fill:#2563eb,stroke:#1e40af,stroke-width:6px,color:#fff,font-size:20px
+    style LIST fill:#059669,stroke:#047857,stroke-width:4px,color:#fff,font-size:16px
+    style USERID fill:#059669,stroke:#047857,stroke-width:4px,color:#fff,font-size:16px
+    style EDIT fill:#059669,stroke:#047857,stroke-width:4px,color:#fff,font-size:16px
+```
+
+### Server Actions
+
+```mermaid
+flowchart LR
+    ACTIONS["📁 app/actions<br/>━━━━━━━━━━━━━<br/>SERVER ACTIONS"]
     
-    ACTIONS --> AC1["📄 authActions.ts<br/>register, login, verify"]
-    ACTIONS --> AC2["📄 memberActions.ts<br/>getMembers, update, photos"]
-    ACTIONS --> AC3["📄 messageActions.ts<br/>create, read, delete"]
-    ACTIONS --> AC4["📄 likeActions.ts<br/>toggle, fetch, mutual"]
+    ACTIONS --> AUTH_A["📄 authActions.ts<br/>Auth & Vérification"]
+    ACTIONS --> MEMBER_A["📄 memberActions.ts<br/>Profils & Photos"]
+    ACTIONS --> MESSAGE_A["📄 messageActions.ts<br/>Messagerie"]
+    ACTIONS --> LIKE_A["📄 likeActions.ts<br/>Système Likes"]
     
-    API --> AP1["📄 [...nextauth] - NextAuth"]
-    API --> AP2["📄 pusher-auth - Auth Pusher"]
-    API --> AP3["📄 sign-image - Sign Cloudinary"]
+    style ACTIONS fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:20px
+    style AUTH_A fill:#7c3aed,stroke:#6d28d9,stroke-width:4px,color:#fff,font-size:16px
+    style MEMBER_A fill:#2563eb,stroke:#1e40af,stroke-width:4px,color:#fff,font-size:16px
+    style MESSAGE_A fill:#059669,stroke:#047857,stroke-width:4px,color:#fff,font-size:16px
+    style LIKE_A fill:#db2777,stroke:#be185d,stroke-width:4px,color:#fff,font-size:16px
+```
+
+### API Routes
+
+```mermaid
+flowchart LR
+    API["📁 app/api<br/>━━━━━━━━━━━━━<br/>API ENDPOINTS"]
     
-    style APP fill:#1f2937,stroke:#111827,stroke-width:5px,color:#fff,font-size:18px
-    style AUTH fill:#7c3aed,stroke:#6d28d9,stroke-width:4px,color:#fff
-    style MEMBERS fill:#2563eb,stroke:#1e40af,stroke-width:4px,color:#fff
-    style ACTIONS fill:#d97706,stroke:#b45309,stroke-width:4px,color:#fff
-    style API fill:#059669,stroke:#047857,stroke-width:4px,color:#fff
+    API --> NEXTAUTH["📄 auth/[...nextauth]<br/>NextAuth handlers"]
+    API --> PUSHER_A["📄 pusher-auth<br/>Pusher authorization"]
+    API --> SIGN["📄 sign-image<br/>Cloudinary signature"]
+    
+    style API fill:#059669,stroke:#047857,stroke-width:6px,color:#fff,font-size:20px
+    style NEXTAUTH fill:#7c3aed,stroke:#6d28d9,stroke-width:4px,color:#fff,font-size:16px
+    style PUSHER_A fill:#6b21a8,stroke:#581c87,stroke-width:4px,color:#fff,font-size:16px
+    style SIGN fill:#1e40af,stroke:#1e3a8a,stroke-width:4px,color:#fff,font-size:16px
 ```
 
 ---
@@ -156,30 +200,35 @@ flowchart TD
 
 ### Structure et Rôles
 
+### Services Externes (src/lib/)
+
 ```mermaid
-flowchart TD
-    LIB["📁 SRC/LIB<br/>Services et Utilitaires"]
+flowchart LR
+    PRISMA["📄 prisma.ts<br/>━━━━━━━━━━━━━<br/>CLIENT DATABASE<br/>PrismaClient"]
+    CLOUD["📄 cloudinary.ts<br/>━━━━━━━━━━━━━<br/>CONFIG IMAGES<br/>Cloudinary"]
+    PUSHER["📄 pusher.ts<br/>━━━━━━━━━━━━━<br/>TEMPS RÉEL<br/>Pusher"]
+    MAIL["📄 mail.ts<br/>━━━━━━━━━━━━━<br/>SERVICE EMAIL<br/>Resend"]
     
-    LIB --> PRISMA_FILE["📄 prisma.ts<br/>━━━━━━━━━━━<br/>Client PrismaClient<br/>Singleton<br/>Logs configuration"]
+    style PRISMA fill:#7c3aed,stroke:#6d28d9,stroke-width:6px,color:#fff,font-size:18px
+    style CLOUD fill:#1e40af,stroke:#1e3a8a,stroke-width:6px,color:#fff,font-size:18px
+    style PUSHER fill:#6b21a8,stroke:#581c87,stroke-width:6px,color:#fff,font-size:18px
+    style MAIL fill:#dc2626,stroke:#b91c1c,stroke-width:6px,color:#fff,font-size:18px
+```
+
+### Validation Zod (src/lib/schemas/)
+
+```mermaid
+flowchart LR
+    SCHEMAS["📁 SCHEMAS"]
     
-    LIB --> CLOUDINARY_FILE["📄 cloudinary.ts<br/>━━━━━━━━━━━<br/>Config Cloudinary<br/>cloud_name, api_key<br/>Export instance"]
+    SCHEMAS --> LOGIN["📄 loginSchema<br/>email + password"]
+    SCHEMAS --> REGISTER["📄 registerSchema<br/>name, email, password"]
+    SCHEMAS --> MESSAGE["📄 messageSchema<br/>text, recipientId"]
     
-    LIB --> PUSHER_FILE["📄 pusher.ts<br/>━━━━━━━━━━━<br/>Pusher Server + Client<br/>Cluster: mt1<br/>Channels privés"]
-    
-    LIB --> MAIL_FILE["📄 mail.ts<br/>━━━━━━━━━━━<br/>Service Resend<br/>sendVerificationEmail<br/>sendPasswordResetEmail"]
-    
-    LIB --> SCHEMAS["📁 schemas/<br/>Validation Zod"]
-    
-    SCHEMAS --> S1["📄 loginSchema - email/password"]
-    SCHEMAS --> S2["📄 registerSchema - inscription"]
-    SCHEMAS --> S3["📄 messageSchema - messages"]
-    
-    style LIB fill:#1f2937,stroke:#111827,stroke-width:5px,color:#fff,font-size:18px
-    style PRISMA_FILE fill:#7c3aed,stroke:#6d28d9,stroke-width:3px,color:#fff
-    style CLOUDINARY_FILE fill:#1e40af,stroke:#1e3a8a,stroke-width:3px,color:#fff
-    style PUSHER_FILE fill:#6b21a8,stroke:#581c87,stroke-width:3px,color:#fff
-    style MAIL_FILE fill:#dc2626,stroke:#b91c1c,stroke-width:3px,color:#fff
-    style SCHEMAS fill:#d97706,stroke:#b45309,stroke-width:3px,color:#fff
+    style SCHEMAS fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:20px
+    style LOGIN fill:#059669,stroke:#047857,stroke-width:4px,color:#fff,font-size:16px
+    style REGISTER fill:#059669,stroke:#047857,stroke-width:4px,color:#fff,font-size:16px
+    style MESSAGE fill:#059669,stroke:#047857,stroke-width:4px,color:#fff,font-size:16px
 ```
 
 ---
@@ -250,88 +299,89 @@ flowchart TD
 
 ## Dossier src/components - Composants UI
 
-### Composants Clés
+### Composants Images
 
 ```mermaid
-flowchart TD
-    COMP["src/components/"]
+flowchart LR
+    IMG1["📄 MemberImage.tsx<br/>━━━━━━━━━━━━━<br/>Avatar membre<br/>Fallback image<br/>Optimisation next/image"]
+    IMG2["📄 MemberPhotos.tsx<br/>━━━━━━━━━━━━━<br/>Galerie photos<br/>Star + Delete buttons"]
+    IMG3["📄 ImageUploadButton.tsx<br/>━━━━━━━━━━━━━<br/>Widget Cloudinary<br/>Preset: nextmatch"]
     
-    COMP --> CARDS["Cartes<br/>━━━━━━━━━━━"]
-    COMP --> IMAGES["Images<br/>━━━━━━━━━━━"]
-    COMP --> BUTTONS["Boutons<br/>━━━━━━━━━━━"]
-    COMP --> NAVBAR["Navigation<br/>━━━━━━━━━━━"]
-    COMP --> UTILS["Utilitaires<br/>━━━━━━━━━━━"]
+    style IMG1 fill:#2563eb,stroke:#1e40af,stroke-width:6px,color:#fff,font-size:18px
+    style IMG2 fill:#2563eb,stroke:#1e40af,stroke-width:6px,color:#fff,font-size:18px
+    style IMG3 fill:#2563eb,stroke:#1e40af,stroke-width:6px,color:#fff,font-size:18px
+```
+
+### Composants Boutons
+
+```mermaid
+flowchart LR
+    BTN1["📄 LikeButton.tsx<br/>━━━━━━━━━━━━━<br/>Toggle like/unlike<br/>Animation coeur<br/>Server Action"]
+    BTN2["📄 DeleteButton.tsx<br/>━━━━━━━━━━━━━<br/>Suppression photo<br/>Confirmation modal"]
+    BTN3["📄 StarButton.tsx<br/>━━━━━━━━━━━━━<br/>Photo principale<br/>Toggle étoile"]
     
-    CARDS --> CARD_WRAP["CardWrapper.tsx<br/>Container carte avec ombre"]
-    CARDS --> CARD_INNER["CardInnerWrapper.tsx<br/>Contenu interne carte"]
+    style BTN1 fill:#db2777,stroke:#be185d,stroke-width:6px,color:#fff,font-size:18px
+    style BTN2 fill:#db2777,stroke:#be185d,stroke-width:6px,color:#fff,font-size:18px
+    style BTN3 fill:#db2777,stroke:#be185d,stroke-width:6px,color:#fff,font-size:18px
+```
+
+### Composants Navigation
+
+```mermaid
+flowchart LR
+    NAV1["📄 TopNav.tsx<br/>━━━━━━━━━━━━━<br/>Barre navigation<br/>Logo + Links"]
+    NAV2["📄 UserMenu.tsx<br/>━━━━━━━━━━━━━<br/>Menu utilisateur<br/>Avatar dropdown"]
+    NAV3["📄 FiltersWrapper.tsx<br/>━━━━━━━━━━━━━<br/>Filtres membres<br/>Genre, âge, photo"]
     
-    IMAGES --> MEMBER_IMG["MemberImage.tsx<br/>━━━━━━━━━━━<br/>✓ Avatar membre<br/>✓ Fallback si pas d'image<br/>✓ Optimisation next/image"]
-    
-    IMAGES --> MEMBER_PHOTOS["MemberPhotos.tsx<br/>━━━━━━━━━━━<br/>✓ Galerie photos<br/>✓ Star button (photo principale)<br/>✓ Delete button"]
-    
-    IMAGES --> IMG_UPLOAD["ImageUploadButton.tsx<br/>━━━━━━━━━━━<br/>✓ Widget Cloudinary<br/>✓ Preset: nextmatch<br/>✓ Callback onUpload"]
-    
-    BUTTONS --> LIKE_BTN["LikeButton.tsx<br/>━━━━━━━━━━━<br/>✓ Toggle like/unlike<br/>✓ Animation<br/>✓ Server Action call"]
-    
-    BUTTONS --> DELETE_BTN["DeleteButton.tsx<br/>━━━━━━━━━━━<br/>✓ Suppression photo<br/>✓ Confirmation modal<br/>✓ Optimistic update"]
-    
-    BUTTONS --> STAR_BTN["StarButton.tsx<br/>━━━━━━━━━━━<br/>✓ Photo principale<br/>✓ Toggle star<br/>✓ Update database"]
-    
-    NAVBAR --> TOPNAV["TopNav.tsx<br/>━━━━━━━━━━━<br/>✓ Logo<br/>✓ Links navigation<br/>✓ UserMenu"]
-    
-    NAVBAR --> USER_MENU["UserMenu.tsx<br/>━━━━━━━━━━━<br/>✓ Avatar dropdown<br/>✓ Edit profile<br/>✓ Logout"]
-    
-    NAVBAR --> FILTERS_W["FiltersWrapper.tsx<br/>━━━━━━━━━━━<br/>✓ Filtres genre/âge<br/>✓ With photo toggle<br/>✓ Order by select"]
-    
-    UTILS --> EMPTY["EmptyState.tsx<br/>━━━━━━━━━━━<br/>Message si pas de données"]
-    
-    UTILS --> LOADING_C["LoadingComponent.tsx<br/>━━━━━━━━━━━<br/>Spinner chargement"]
-    
-    UTILS --> PROVIDERS["Providers.tsx<br/>━━━━━━━━━━━<br/>✓ NextUIProvider<br/>✓ ToastContainer<br/>✓ Wrappers globaux"]
-    
-    style COMP fill:#1f2937,stroke:#111827,stroke-width:3px,color:#fff
-    style IMAGES fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
-    style BUTTONS fill:#db2777,stroke:#be185d,stroke-width:2px,color:#fff
-    style NAVBAR fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
-    style UTILS fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    style NAV1 fill:#059669,stroke:#047857,stroke-width:6px,color:#fff,font-size:18px
+    style NAV2 fill:#059669,stroke:#047857,stroke-width:6px,color:#fff,font-size:18px
+    style NAV3 fill:#059669,stroke:#047857,stroke-width:6px,color:#fff,font-size:18px
 ```
 
 ---
 
 ## Dossier src/hooks - Hooks Personnalisés
 
-### Hooks et Leurs Rôles
+### Hooks Messagerie
 
 ```mermaid
-flowchart TD
-    HOOKS["src/hooks/"]
+flowchart LR
+    H1["📄 useMessages.tsx<br/>━━━━━━━━━━━━━<br/>MESSAGERIE<br/>Subscribe Pusher<br/>État messages"]
+    H2["📄 useMessageStore.ts<br/>━━━━━━━━━━━━━<br/>STORE ZUSTAND<br/>Messages non lus<br/>State global"]
     
-    HOOKS --> MSG_HOOK["useMessages.tsx<br/>━━━━━━━━━━━━━━━━━<br/>RÔLE: Gestion messagerie<br/>━━━━━━━━━━━<br/>✓ État messages local<br/>✓ Subscribe Pusher channel<br/>✓ Écoute nouveaux messages<br/>✓ Pagination messages<br/>✓ Mark as read"]
+    style H1 fill:#059669,stroke:#047857,stroke-width:6px,color:#fff,font-size:18px
+    style H2 fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:18px
+```
+
+### Hooks Présence
+
+```mermaid
+flowchart LR
+    P1["📄 usePresenceChannel.ts<br/>━━━━━━━━━━━━━<br/>PRÉSENCE EN LIGNE<br/>Track users online<br/>Pusher presence"]
+    P2["📄 usePresenceStore.ts<br/>━━━━━━━━━━━━━<br/>STORE PRÉSENCE<br/>Map memberIds<br/>Add/remove"]
     
-    HOOKS --> MSG_STORE["useMessageStore.ts<br/>━━━━━━━━━━━━━━━━━<br/>RÔLE: Store Zustand messages<br/>━━━━━━━━━━━<br/>✓ Messages non lus<br/>✓ Ajouter/supprimer message<br/>✓ Update read status<br/>✓ State global"]
+    style P1 fill:#2563eb,stroke:#1e40af,stroke-width:6px,color:#fff,font-size:18px
+    style P2 fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:18px
+```
+
+### Hooks Filtres
+
+```mermaid
+flowchart LR
+    F1["📄 useFilters.ts<br/>━━━━━━━━━━━━━<br/>LOGIQUE FILTRES<br/>Sync URL ↔ Store<br/>Transitions"]
+    F2["📄 useFilterStore.ts<br/>━━━━━━━━━━━━━<br/>STORE FILTRES<br/>Gender, age, photo<br/>State global"]
     
-    HOOKS --> PRESENCE_HOOK["usePresenceChannel.ts<br/>━━━━━━━━━━━━━━━━━<br/>RÔLE: Utilisateurs en ligne<br/>━━━━━━━━━━━<br/>✓ Subscribe presence channel<br/>✓ Track members online<br/>✓ Handle join/leave<br/>✓ Update presence store"]
+    style F1 fill:#7c3aed,stroke:#6d28d9,stroke-width:6px,color:#fff,font-size:18px
+    style F2 fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:18px
+```
+
+### Hook Notifications
+
+```mermaid
+flowchart LR
+    N1["📄 useNotificationChannel.ts<br/>━━━━━━━━━━━━━<br/>NOTIFICATIONS<br/>Nouveau like → toast<br/>Nouveau message → toast"]
     
-    HOOKS --> PRESENCE_STORE["usePresenceStore.ts<br/>━━━━━━━━━━━━━━━━━<br/>RÔLE: Store utilisateurs online<br/>━━━━━━━━━━━<br/>✓ Map de memberIds<br/>✓ Add/remove membres<br/>✓ État global présence"]
-    
-    HOOKS --> NOTIF_HOOK["useNotificationChannel.ts<br/>━━━━━━━━━━━━━━━━━<br/>RÔLE: Notifications temps réel<br/>━━━━━━━━━━━<br/>✓ Écoute events Pusher<br/>✓ Nouveau like → toast<br/>✓ Nouveau message → toast<br/>✓ Sons notifications"]
-    
-    HOOKS --> FILTERS_HOOK["useFilters.ts<br/>━━━━━━━━━━━━━━━━━<br/>RÔLE: Logique filtres<br/>━━━━━━━━━━━<br/>✓ Sync URL ↔ Store<br/>✓ isPending state<br/>✓ startTransition<br/>✓ Router transitions"]
-    
-    HOOKS --> FILTER_STORE["useFilterStore.ts<br/>━━━━━━━━━━━━━━━━━<br/>RÔLE: Store filtres Zustand<br/>━━━━━━━━━━━<br/>✓ gender, ageRange<br/>✓ withPhoto, orderBy<br/>✓ Persist state"]
-    
-    HOOKS --> PAGINATION["usePaginationStore.ts<br/>━━━━━━━━━━━━━━━━━<br/>RÔLE: Pagination state<br/>━━━━━━━━━━━<br/>✓ Page courante<br/>✓ Total pages<br/>✓ setPage fonction"]
-    
-    HOOKS --> ROLE_HOOK["useRole.ts<br/>━━━━━━━━━━━━━━━━━<br/>RÔLE: Vérif rôle user<br/>━━━━━━━━━━━<br/>✓ Récupère session<br/>✓ Check si ADMIN<br/>✓ Check si MEMBER"]
-    
-    style HOOKS fill:#1f2937,stroke:#111827,stroke-width:3px,color:#fff
-    style MSG_HOOK fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
-    style MSG_STORE fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style PRESENCE_HOOK fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
-    style PRESENCE_STORE fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style NOTIF_HOOK fill:#db2777,stroke:#be185d,stroke-width:2px,color:#fff
-    style FILTERS_HOOK fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff
-    style FILTER_STORE fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    style N1 fill:#db2777,stroke:#be185d,stroke-width:6px,color:#fff,font-size:18px
 ```
 
 ---
