@@ -632,8 +632,8 @@ graph LR
     Action --> DB
     DB --> List
     
-    style Store fill:#f59e0b
-    style DB fill:#3b82f6
+    style Store fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    style DB fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -696,12 +696,12 @@ graph TB
     Auth --> Google
     Auth --> GitHub
     
-    style NextApp fill:#000
-    style Neon fill:#00d4ff
-    style Supabase fill:#3ecf8e
-    style Cloud fill:#3448c5
-    style Push fill:#300d4f
-    style Email fill:#000
+    style NextApp fill:#1f2937,stroke:#111827,stroke-width:2px,color:#fff
+    style Neon fill:#0284c7,stroke:#0369a1,stroke-width:2px,color:#fff
+    style Supabase fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
+    style Cloud fill:#1e40af,stroke:#1e3a8a,stroke-width:2px,color:#fff
+    style Push fill:#6b21a8,stroke:#581c87,stroke-width:2px,color:#fff
+    style Email fill:#1f2937,stroke:#111827,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -946,9 +946,9 @@ graph TD
     UseFilters --> FilterStore
     UseFilters --> PaginationStore
     
-    style MessageStore fill:#f59e0b
-    style UseMessages fill:#3b82f6
-    style Pusher fill:#300d4f
+    style MessageStore fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    style UseMessages fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
+    style Pusher fill:#6b21a8,stroke:#581c87,stroke-width:2px,color:#fff
 ```
 
 ---
