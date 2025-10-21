@@ -25,6 +25,7 @@ Bienvenue dans la documentation complète du projet **Next Match** !
 | [15 - Comparaison Services Temps Réel](./15-comparaison-services-temps-reel.md) | Analyse Pusher vs Ably vs Supabase Realtime avec guides de migration |
 | [16 - Diagrammes Architecture](./16-diagrammes-architecture.md) | Diagrammes Mermaid complets de l'architecture, flux de données et déploiement |
 | [17 - Arborescence et Rôles Fichiers](./17-arborescence-fichiers-roles.md) | Arborescence complète du projet avec rôle détaillé de chaque fichier important |
+| [18 - Technologies et Alternatives](./18-technologies-et-alternatives.md) | Liste complète des technologies avec alternatives et équivalents |
 
 ---
 
@@ -123,7 +124,8 @@ documentation/
 ├── 14-comparaison-services-emails.md  # Comparaison complète des services d'envoi d'emails
 ├── 15-comparaison-services-temps-reel.md # Analyse Pusher vs Ably vs Supabase Realtime
 ├── 16-diagrammes-architecture.md      # Diagrammes Mermaid de l'architecture complète
-└── 17-arborescence-fichiers-roles.md  # Arborescence projet avec rôles de chaque fichier
+├── 17-arborescence-fichiers-roles.md  # Arborescence projet avec rôles de chaque fichier
+└── 18-technologies-et-alternatives.md # Technologies utilisées et leurs alternatives
 ```
 
 ---

@@ -117,6 +117,7 @@ La documentation détaillée est disponible dans le dossier [`documentation/`](.
 | **[Services Temps Réel](./documentation/15-comparaison-services-temps-reel.md)** | Analyse Pusher vs Ably vs Supabase Realtime avec migrations |
 | **[Diagrammes Architecture](./documentation/16-diagrammes-architecture.md)** | Diagrammes Mermaid visuels de toute l'architecture système |
 | **[Arborescence Fichiers](./documentation/17-arborescence-fichiers-roles.md)** | Structure complète du projet avec rôle de chaque fichier |
+| **[Technologies et Alternatives](./documentation/18-technologies-et-alternatives.md)** | Technologies utilisées avec alternatives et équivalents |
 
 ---
 
