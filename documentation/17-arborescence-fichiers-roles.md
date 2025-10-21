@@ -20,39 +20,38 @@ Ce document présente l'arborescence complète du projet avec le rôle détaill�
 ## Architecture Globale du Projet
 
 ```mermaid
-graph TB
-    Root["01-next-match-main-1/"]
+flowchart TD
+    Root["📁 PROJET: 01-next-match-main-1"]
     
-    Root --> SRC["src/<br/>Code source principal"]
-    Root --> PRISMA["prisma/<br/>Base de données"]
-    Root --> PUBLIC["public/<br/>Fichiers statiques"]
-    Root --> DOC["documentation/<br/>Documentation"]
-    Root --> CONFIG["Fichiers config<br/>racine"]
+    Root --> SRC["📁 SRC<br/>Code source principal"]
     
-    SRC --> APP["app/<br/>Pages et routes"]
-    SRC --> COMP["components/<br/>Composants UI"]
-    SRC --> LIB["lib/<br/>Utilitaires"]
-    SRC --> HOOKS["hooks/<br/>Hooks React"]
-    SRC --> TYPES["types/<br/>TypeScript types"]
+    SRC --> APP["📁 APP<br/>Pages et routes Next.js 14"]
+    SRC --> COMP["📁 COMPONENTS<br/>Composants UI réutilisables"]
+    SRC --> LIB["📁 LIB<br/>Services et utilitaires"]
+    SRC --> HOOKS["📁 HOOKS<br/>Hooks React personnalisés"]
     
-    APP --> AUTH_GROUP["auth/<br/>Authentification"]
-    APP --> MEMBERS["members/<br/>Profils"]
-    APP --> MESSAGES["messages/<br/>Messagerie"]
-    APP --> ACTIONS["actions/<br/>Server Actions"]
-    APP --> API["api/<br/>API Routes"]
+    APP --> AUTH_G["📁 (auth)<br/>Routes authentification"]
+    APP --> MEMBERS_G["📁 members<br/>Pages profils membres"]
+    APP --> ACTIONS_G["📁 actions<br/>Server Actions"]
+    APP --> API_G["📁 api<br/>API Routes"]
     
-    CONFIG --> ENV[".env<br/>Variables d'environnement"]
-    CONFIG --> PACKAGE["package.json<br/>Dépendances"]
-    CONFIG --> TSCONFIG["tsconfig.json<br/>Config TypeScript"]
-    CONFIG --> TAILWIND["tailwind.config.ts<br/>Config styles"]
-    CONFIG --> NEXT["next.config.mjs<br/>Config Next.js"]
+    Root --> PRISMA_R["📁 PRISMA<br/>Base de données"]
     
-    style Root fill:#1f2937,stroke:#111827,stroke-width:4px,color:#fff
-    style SRC fill:#2563eb,stroke:#1e40af,stroke-width:3px,color:#fff
-    style APP fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
-    style LIB fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style PRISMA fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff
-    style CONFIG fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
+    PRISMA_R --> SCHEMA["📄 schema.prisma<br/>Schéma BDD 7 models"]
+    PRISMA_R --> SEED["📄 seed.ts<br/>Données de test"]
+    
+    Root --> PUBLIC_R["📁 PUBLIC<br/>Assets statiques"]
+    Root --> DOC_R["📁 DOCUMENTATION<br/>17 guides complets"]
+    
+    Root --> ENV_R["📄 .env<br/>VARIABLES SECRÈTES"]
+    Root --> PACKAGE_R["📄 package.json<br/>Dépendances npm"]
+    
+    style Root fill:#1f2937,stroke:#111827,stroke-width:5px,color:#fff,font-size:18px
+    style SRC fill:#2563eb,stroke:#1e40af,stroke-width:4px,color:#fff,font-size:16px
+    style APP fill:#059669,stroke:#047857,stroke-width:3px,color:#fff
+    style LIB fill:#d97706,stroke:#b45309,stroke-width:3px,color:#fff
+    style PRISMA_R fill:#7c3aed,stroke:#6d28d9,stroke-width:3px,color:#fff
+    style ENV_R fill:#dc2626,stroke:#b91c1c,stroke-width:3px,color:#fff
 ```
 
 ---
@@ -62,52 +61,39 @@ graph TB
 ### Structure Complète
 
 ```mermaid
-graph TB
-    APP["src/app/"]
+flowchart TD
+    APP["📁 SRC/APP<br/>Routes et Pages Next.js"]
     
-    APP --> AUTH["auth/<br/>Routes authentification"]
-    APP --> MEMBERS_R["members/<br/>Pages profils"]
-    APP --> MESSAGES_R["messages/<br/>Messagerie"]
-    APP --> LISTS["lists/<br/>Listes likes"]
-    APP --> ADMIN["admin/<br/>Administration"]
-    APP --> ACTIONS["actions/<br/>Server Actions"]
-    APP --> API_R["api/<br/>API Routes"]
-    APP --> ROOT_FILES["Fichiers racine"]
+    APP --> AUTH["📁 AUTH<br/>Authentification"]
+    APP --> MEMBERS["📁 MEMBERS<br/>Profils membres"]
+    APP --> ACTIONS["📁 ACTIONS<br/>Server Actions"]
+    APP --> API["📁 API<br/>API Routes"]
     
-    AUTH --> LOGIN["login/<br/>Page connexion"]
-    AUTH --> REGISTER["register/<br/>Inscription"]
-    AUTH --> VERIFY["verify-email/<br/>Vérification email"]
-    AUTH --> FORGOT["forgot-password/<br/>Mot de passe oublié"]
-    AUTH --> RESET["reset-password/<br/>Reset password"]
-    AUTH --> COMPLETE["complete-profile/<br/>Compléter profil"]
+    AUTH --> A1["📄 login - Page connexion"]
+    AUTH --> A2["📄 register - Inscription"]
+    AUTH --> A3["📄 verify-email - Vérif email"]
     
-    MEMBERS_R --> MEMBER_ID["[userId]/<br/>Profil dynamique"]
-    MEMBERS_R --> EDIT["edit/<br/>Édition profil"]
-    MEMBERS_R --> MEMBER_LIST["page.tsx<br/>Liste membres"]
+    MEMBERS --> M1["📄 page.tsx - Liste tous membres"]
+    MEMBERS --> M2["📁 [userId] - Profil dynamique"]
+    MEMBERS --> M3["📁 edit - Édition profil"]
     
-    MEMBER_ID --> CHAT["chat/<br/>Messagerie privée"]
-    MEMBER_ID --> PHOTOS["photos/<br/>Photos membre"]
-    MEMBER_ID --> PROFILE["page.tsx<br/>Vue profil"]
+    M2 --> M2A["📄 chat - Messagerie 1-to-1"]
+    M2 --> M2B["📄 photos - Galerie photos"]
     
-    ACTIONS --> AUTH_ACT["authActions.ts<br/>Actions auth"]
-    ACTIONS --> MEMBER_ACT["memberActions.ts<br/>Actions membres"]
-    ACTIONS --> MESSAGE_ACT["messageActions.ts<br/>Actions messages"]
-    ACTIONS --> LIKE_ACT["likeActions.ts<br/>Actions likes"]
+    ACTIONS --> AC1["📄 authActions.ts<br/>register, login, verify"]
+    ACTIONS --> AC2["📄 memberActions.ts<br/>getMembers, update, photos"]
+    ACTIONS --> AC3["📄 messageActions.ts<br/>create, read, delete"]
+    ACTIONS --> AC4["📄 likeActions.ts<br/>toggle, fetch, mutual"]
     
-    API_R --> NEXTAUTH_API["auth/[...nextauth]/<br/>NextAuth endpoint"]
-    API_R --> PUSHER_API["pusher-auth/<br/>Auth Pusher"]
-    API_R --> SIGN_API["sign-image/<br/>Signature Cloudinary"]
+    API --> AP1["📄 [...nextauth] - NextAuth"]
+    API --> AP2["📄 pusher-auth - Auth Pusher"]
+    API --> AP3["📄 sign-image - Sign Cloudinary"]
     
-    ROOT_FILES --> LAYOUT["layout.tsx<br/>Layout global"]
-    ROOT_FILES --> PAGE["page.tsx<br/>Page d'accueil"]
-    ROOT_FILES --> ERROR["error.tsx<br/>Gestion erreurs"]
-    ROOT_FILES --> LOADING["loading.tsx<br/>États chargement"]
-    
-    style APP fill:#1f2937,stroke:#111827,stroke-width:3px,color:#fff
-    style AUTH fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff
-    style MEMBERS_R fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
-    style ACTIONS fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style API_R fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
+    style APP fill:#1f2937,stroke:#111827,stroke-width:5px,color:#fff,font-size:18px
+    style AUTH fill:#7c3aed,stroke:#6d28d9,stroke-width:4px,color:#fff
+    style MEMBERS fill:#2563eb,stroke:#1e40af,stroke-width:4px,color:#fff
+    style ACTIONS fill:#d97706,stroke:#b45309,stroke-width:4px,color:#fff
+    style API fill:#059669,stroke:#047857,stroke-width:4px,color:#fff
 ```
 
 ---
@@ -172,38 +158,28 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    LIB["src/lib/"]
+    LIB["📁 SRC/LIB<br/>Services et Utilitaires"]
     
-    LIB --> PRISMA_FILE["prisma.ts<br/>━━━━━━━━━━━<br/>RÔLE: Client Prisma<br/>- Instance PrismaClient<br/>- Configuration logs<br/>- Singleton pattern"]
+    LIB --> PRISMA_FILE["📄 prisma.ts<br/>━━━━━━━━━━━<br/>Client PrismaClient<br/>Singleton<br/>Logs configuration"]
     
-    LIB --> CLOUDINARY_FILE["cloudinary.ts<br/>━━━━━━━━━━━<br/>RÔLE: Config Cloudinary<br/>- API credentials<br/>- Cloud name<br/>- Export instance"]
+    LIB --> CLOUDINARY_FILE["📄 cloudinary.ts<br/>━━━━━━━━━━━<br/>Config Cloudinary<br/>cloud_name, api_key<br/>Export instance"]
     
-    LIB --> PUSHER_FILE["pusher.ts<br/>━━━━━━━━━━━<br/>RÔLE: Config Pusher<br/>- Server instance<br/>- Client instance<br/>- Cluster mt1<br/>- Presence channels"]
+    LIB --> PUSHER_FILE["📄 pusher.ts<br/>━━━━━━━━━━━<br/>Pusher Server + Client<br/>Cluster: mt1<br/>Channels privés"]
     
-    LIB --> MAIL_FILE["mail.ts<br/>━━━━━━━━━━━<br/>RÔLE: Service email<br/>- sendVerificationEmail<br/>- sendPasswordResetEmail<br/>- Resend client"]
+    LIB --> MAIL_FILE["📄 mail.ts<br/>━━━━━━━━━━━<br/>Service Resend<br/>sendVerificationEmail<br/>sendPasswordResetEmail"]
     
-    LIB --> TOKENS_FILE["tokens.ts<br/>━━━━━━━━━━━<br/>RÔLE: Gestion tokens<br/>- generateToken<br/>- getTokenByToken<br/>- Expiration 1 heure"]
+    LIB --> SCHEMAS["📁 schemas/<br/>Validation Zod"]
     
-    LIB --> UTIL_FILE["util.ts<br/>━━━━━━━━━━━<br/>RÔLE: Fonctions utils<br/>- calculateAge<br/>- transformImageUrl<br/>- formatDate"]
+    SCHEMAS --> S1["📄 loginSchema - email/password"]
+    SCHEMAS --> S2["📄 registerSchema - inscription"]
+    SCHEMAS --> S3["📄 messageSchema - messages"]
     
-    LIB --> MAPPINGS_FILE["mappings.ts<br/>━━━━━━━━━━━<br/>RÔLE: Transformations<br/>- cardImageFromMember<br/>- memberFromPrisma<br/>- DTO conversions"]
-    
-    LIB --> SCHEMAS["schemas/<br/>Validation Zod"]
-    
-    SCHEMAS --> LOGIN_SCHEMA["loginSchema.ts<br/>━━━━━━━━━━━<br/>✓ email required<br/>✓ password min 6 chars"]
-    
-    SCHEMAS --> REGISTER_SCHEMA["registerSchema.ts<br/>━━━━━━━━━━━<br/>✓ name, email, password<br/>✓ Validations complexes"]
-    
-    SCHEMAS --> MESSAGE_SCHEMA["messageSchema.ts<br/>━━━━━━━━━━━<br/>✓ text required<br/>✓ recipientId UUID"]
-    
-    SCHEMAS --> MEMBER_SCHEMA["memberEditSchema.ts<br/>━━━━━━━━━━━<br/>✓ description, city, country<br/>✓ dateOfBirth validation"]
-    
-    style LIB fill:#1f2937,stroke:#111827,stroke-width:3px,color:#fff
-    style PRISMA_FILE fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff
-    style CLOUDINARY_FILE fill:#1e40af,stroke:#1e3a8a,stroke-width:2px,color:#fff
-    style PUSHER_FILE fill:#6b21a8,stroke:#581c87,stroke-width:2px,color:#fff
-    style MAIL_FILE fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
-    style SCHEMAS fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    style LIB fill:#1f2937,stroke:#111827,stroke-width:5px,color:#fff,font-size:18px
+    style PRISMA_FILE fill:#7c3aed,stroke:#6d28d9,stroke-width:3px,color:#fff
+    style CLOUDINARY_FILE fill:#1e40af,stroke:#1e3a8a,stroke-width:3px,color:#fff
+    style PUSHER_FILE fill:#6b21a8,stroke:#581c87,stroke-width:3px,color:#fff
+    style MAIL_FILE fill:#dc2626,stroke:#b91c1c,stroke-width:3px,color:#fff
+    style SCHEMAS fill:#d97706,stroke:#b45309,stroke-width:3px,color:#fff
 ```
 
 ---
