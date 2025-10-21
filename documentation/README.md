@@ -26,6 +26,10 @@ Bienvenue dans la documentation complète du projet **Next Match** !
 | [16 - Diagrammes Architecture](./16-diagrammes-architecture.md) | Diagrammes Mermaid complets de l'architecture, flux de données et déploiement |
 | [17 - Arborescence et Rôles Fichiers](./17-arborescence-fichiers-roles.md) | Arborescence complète du projet avec rôle détaillé de chaque fichier important |
 | [18 - Technologies et Alternatives](./18-technologies-et-alternatives.md) | Liste complète des technologies avec alternatives et équivalents |
+| [19 - Caractères Spéciaux dans Passwords](./19-caracteres-speciaux-passwords.md) | Guide complet sur l'encodage URL des mots de passe avec caractères spéciaux |
+| [20 - Système d'Authentification](./20-systeme-authentification.md) | Documentation complète du système d'authentification NextAuth.js avec tous les flux |
+| [21 - Flux Complet Authentification](./21-flux-complet-authentification.md) | Analyse détaillée avec extraits de code : POST users, sessions JWT, et gestion base de données unique |
+| [22 - Comprendre l'Authentification (Pédagogique)](./22-comprendre-authentification-pedagogique.md) | Guide ultra-pédagogique : JWT, cookies, refresh tokens, et comment reproduire le système étape par étape |
 
 ---
 
