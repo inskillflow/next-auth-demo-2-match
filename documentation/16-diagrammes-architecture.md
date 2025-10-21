@@ -1270,46 +1270,46 @@ sequenceDiagram
 ### Principes de Design
 
 ```mermaid
-graph TB
-    Root["Next Match Architecture"]
+flowchart TD
+    Root["NEXT MATCH ARCHITECTURE"]
     
-    Root --> Perf[Performance]
-    Root --> Secu[Sécurité]
-    Root --> Scale[Scalabilité]
-    Root --> DevXP[Expérience Dev]
-    Root --> UserXP[Expérience User]
+    Root --> Perf["1. PERFORMANCE"]
+    Root --> Secu["2. SÉCURITÉ"]
+    Root --> Scale["3. SCALABILITÉ"]
+    Root --> DevXP["4. EXPÉRIENCE DEV"]
+    Root --> UserXP["5. EXPÉRIENCE USER"]
     
-    Perf --> P1["Server Components"]
-    Perf --> P2["Caching agressif"]
-    Perf --> P3["Optimistic Updates"]
-    Perf --> P4["Image Optimization"]
+    Perf --> P1["✓ Server Components"]
+    Perf --> P2["✓ Caching agressif"]
+    Perf --> P3["✓ Optimistic Updates"]
+    Perf --> P4["✓ Image Optimization"]
     
-    Secu --> S1["Middleware Auth"]
-    Secu --> S2["Input Validation"]
-    Secu --> S3["SQL Injection Protection"]
-    Secu --> S4["CSRF Protection"]
+    Secu --> S1["✓ Middleware Auth"]
+    Secu --> S2["✓ Input Validation Zod"]
+    Secu --> S3["✓ SQL Injection Protection"]
+    Secu --> S4["✓ CSRF Protection"]
     
-    Scale --> SC1["Serverless Functions"]
-    Scale --> SC2["CDN Global"]
-    Scale --> SC3["Database Pooling"]
-    Scale --> SC4["Edge Computing"]
+    Scale --> SC1["✓ Serverless Functions"]
+    Scale --> SC2["✓ CDN Global Cloudinary"]
+    Scale --> SC3["✓ Database Pooling"]
+    Scale --> SC4["✓ Edge Computing"]
     
-    DevXP --> D1["TypeScript Strict"]
-    DevXP --> D2["Prisma Type Safety"]
-    DevXP --> D3["Hot Reload"]
-    DevXP --> D4["Error Boundaries"]
+    DevXP --> D1["✓ TypeScript Strict Mode"]
+    DevXP --> D2["✓ Prisma Type Safety"]
+    DevXP --> D3["✓ Hot Reload Next.js"]
+    DevXP --> D4["✓ Error Boundaries"]
     
-    UserXP --> U1["Temps Réel"]
-    UserXP --> U2["Feedback Immédiat"]
-    UserXP --> U3["Progressive Enhancement"]
-    UserXP --> U4["Responsive Design"]
+    UserXP --> U1["✓ Temps Réel Pusher"]
+    UserXP --> U2["✓ Feedback Immédiat"]
+    UserXP --> U3["✓ Progressive Enhancement"]
+    UserXP --> U4["✓ Responsive Design"]
     
-    style Root fill:#1f2937,stroke:#111827,stroke-width:3px,color:#fff
-    style Perf fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
-    style Secu fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
-    style Scale fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
-    style DevXP fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style UserXP fill:#db2777,stroke:#be185d,stroke-width:2px,color:#fff
+    style Root fill:#1f2937,stroke:#111827,stroke-width:4px,color:#fff,font-size:16px
+    style Perf fill:#2563eb,stroke:#1e40af,stroke-width:3px,color:#fff,font-size:14px
+    style Secu fill:#dc2626,stroke:#b91c1c,stroke-width:3px,color:#fff,font-size:14px
+    style Scale fill:#059669,stroke:#047857,stroke-width:3px,color:#fff,font-size:14px
+    style DevXP fill:#d97706,stroke:#b45309,stroke-width:3px,color:#fff,font-size:14px
+    style UserXP fill:#db2777,stroke:#be185d,stroke-width:3px,color:#fff,font-size:14px
 ```
 
 ---
