@@ -63,11 +63,11 @@ graph TB
     NextAuth --> Providers
     NextAuth --> Neon
 
-    style Neon fill:#00d4ff
-    style Cloudinary fill:#3448c5
-    style Pusher fill:#300d4f
-    style Resend fill:#000
-    style NextAuth fill:#9333ea
+    style Neon fill:#0ea5e9,stroke:#0369a1,stroke-width:2px,color:#fff
+    style Cloudinary fill:#1e40af,stroke:#1e3a8a,stroke-width:2px,color:#fff
+    style Pusher fill:#6b21a8,stroke:#581c87,stroke-width:2px,color:#fff
+    style Resend fill:#1f2937,stroke:#111827,stroke-width:2px,color:#fff
+    style NextAuth fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -448,8 +448,8 @@ graph LR
     I --> K[Utilisateur USA<br/>Virginia CDN]
     I --> L[Utilisateur Asie<br/>Singapore CDN]
     
-    style B fill:#3448c5
-    style I fill:#3448c5
+    style B fill:#1e40af,stroke:#1e3a8a,stroke-width:2px,color:#fff
+    style I fill:#1e40af,stroke:#1e3a8a,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -555,9 +555,9 @@ graph TD
         G[Mutual Matches<br/>Lisa]
     end
     
-    style A fill:#3b82f6
-    style B fill:#ec4899
-    style G fill:#10b981
+    style A fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
+    style B fill:#db2777,stroke:#be185d,stroke-width:2px,color:#fff
+    style G fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -588,10 +588,10 @@ graph TD
     CardImage --> PresenceAvatar[PresenceAvatar<br/>Presence Dot]
     LikeBtn --> ServerAction[toggleLikeMember<br/>Server Action]
     
-    style Page fill:#22c55e
-    style Card1 fill:#3b82f6
-    style LikeBtn fill:#ec4899
-    style ServerAction fill:#f59e0b
+    style Page fill:#16a34a,stroke:#15803d,stroke-width:2px,color:#fff
+    style Card1 fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
+    style LikeBtn fill:#db2777,stroke:#be185d,stroke-width:2px,color:#fff
+    style ServerAction fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -747,9 +747,9 @@ graph LR
     A5 -.Gardé.-> B4
     A6 -.Gardé.-> B5
     
-    style A2 fill:#ff6b6b
-    style A4 fill:#ff6b6b
-    style B2 fill:#51cf66
+    style A2 fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
+    style A4 fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
+    style B2 fill:#16a34a,stroke:#15803d,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -805,10 +805,10 @@ flowchart TD
     
     UpdateMessages --> DisplayMessages
     
-    style HomePage fill:#3b82f6
-    style Matches fill:#3b82f6
-    style MessagePage fill:#10b981
-    style Notification fill:#f59e0b
+    style HomePage fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
+    style Matches fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
+    style MessagePage fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
+    style Notification fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -850,10 +850,10 @@ flowchart TD
     RedirectLogin --> LoginPage[/login]
     RedirectComplete --> CompletePage[/complete-profile]
     
-    style Middleware fill:#f59e0b
-    style CheckAuth fill:#ec4899
-    style Page fill:#10b981
-    style Forbidden fill:#ef4444
+    style Middleware fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    style CheckAuth fill:#db2777,stroke:#be185d,stroke-width:2px,color:#fff
+    style Page fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
+    style Forbidden fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -1060,9 +1060,9 @@ graph LR
     Prod --> Push
     Prod --> Mail
     
-    style Build fill:#000
-    style Prod fill:#000
-    style DB fill:#3ecf8e
+    style Build fill:#1f2937,stroke:#111827,stroke-width:2px,color:#fff
+    style Prod fill:#1f2937,stroke:#111827,stroke-width:2px,color:#fff
+    style DB fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -1090,9 +1090,9 @@ graph TD
     Update[Mutation<br/>updateMember] --> Invalidate[revalidateTag<br/>'members']
     Invalidate --> Cache
     
-    style Cached fill:#10b981
-    style ServerAction fill:#f59e0b
-    style DB fill:#3b82f6
+    style Cached fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
+    style ServerAction fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    style DB fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -1137,9 +1137,9 @@ graph TB
     
     Session --> UIState
     
-    style Database fill:#3b82f6
-    style Messages fill:#f59e0b
-    style Session fill:#9333ea
+    style Database fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
+    style Messages fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    style Session fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -1164,13 +1164,13 @@ graph TD
     
     L6 --> Data[(Données Sécurisées)]
     
-    style L1 fill:#ef4444
-    style L2 fill:#f97316
-    style L3 fill:#f59e0b
-    style L4 fill:#eab308
-    style L5 fill:#84cc16
-    style L6 fill:#22c55e
-    style Data fill:#10b981
+    style L1 fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
+    style L2 fill:#ea580c,stroke:#c2410c,stroke-width:2px,color:#fff
+    style L3 fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    style L4 fill:#ca8a04,stroke:#a16207,stroke-width:2px,color:#fff
+    style L5 fill:#65a30d,stroke:#4d7c0f,stroke-width:2px,color:#fff
+    style L6 fill:#16a34a,stroke:#15803d,stroke-width:2px,color:#fff
+    style Data fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -1205,9 +1205,9 @@ graph TB
         Serverless --> ExtRT
     end
     
-    style MT fill:#ef4444
-    style Edge fill:#10b981
-    style Serverless fill:#10b981
+    style MT fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
+    style Edge fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
+    style Serverless fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
 ```
 
 **Avantages Serverless :**
@@ -1365,10 +1365,10 @@ graph TB
     React --> Zustand
     React --> RHF
     
-    style Next fill:#000
-    style React fill:#61dafb
-    style Prisma fill:#2d3748
-    style NextAuth fill:#9333ea
+    style Next fill:#1f2937,stroke:#111827,stroke-width:2px,color:#fff
+    style React fill:#0ea5e9,stroke:#0369a1,stroke-width:2px,color:#fff
+    style Prisma fill:#1f2937,stroke:#111827,stroke-width:2px,color:#fff
+    style NextAuth fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -1399,9 +1399,9 @@ flowchart LR
     
     Display -->|Render| User
     
-    style Store fill:#f59e0b
-    style DB fill:#3b82f6
-    style Prisma fill:#2d3748
+    style Store fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    style DB fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
+    style Prisma fill:#1f2937,stroke:#111827,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -1458,9 +1458,9 @@ graph TB
     ProdDeploy --> ProdPush
     ProdDeploy --> ProdMail
     
-    style Main fill:#10b981
-    style ProdDeploy fill:#000
-    style ProdDB fill:#3ecf8e
+    style Main fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
+    style ProdDeploy fill:#1f2937,stroke:#111827,stroke-width:2px,color:#fff
+    style ProdDB fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
 ```
 
 ---
