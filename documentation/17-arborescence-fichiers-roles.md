@@ -504,62 +504,15 @@ flowchart TD
 
 ## Arborescence Complète avec Rôles
 
-### Vue Détaillée du Projet
+### SUPPRIMÉ - Trop complexe
 
-```mermaid
-flowchart TD
-    ROOT["📁 01-next-match-main-1"]
-    
-    ROOT --> SRC["📁 src<br/>Code source"]
-    ROOT --> PRISMA_D["📁 prisma<br/>Base de données"]
-    ROOT --> PUBLIC["📁 public<br/>Assets statiques"]
-    ROOT --> DOC["📁 documentation<br/>16 guides"]
-    ROOT --> NODE["📁 node_modules<br/>Dépendances"]
-    
-    SRC --> APP_D["📁 app<br/>App Router Next.js 14"]
-    SRC --> COMP_D["📁 components<br/>Composants React"]
-    SRC --> LIB_D["📁 lib<br/>Utilitaires"]
-    SRC --> HOOKS_D["📁 hooks<br/>Hooks custom"]
-    SRC --> TYPES_D["📁 types<br/>TypeScript"]
-    SRC --> AUTH_FILE["📄 auth.ts<br/>Config NextAuth principale"]
-    SRC --> AUTH_CONFIG_FILE["📄 auth.config.ts<br/>Providers OAuth"]
-    SRC --> MIDDLEWARE_FILE["📄 middleware.ts<br/>Protection routes"]
-    SRC --> ROUTES_FILE["📄 routes.ts<br/>Définitions routes"]
-    
-    APP_D --> AUTH_DIR["📁 auth<br/>Pages auth"]
-    APP_D --> MEMBERS_DIR["📁 members<br/>Pages profils"]
-    APP_D --> MESSAGES_DIR["📁 messages<br/>Messagerie"]
-    APP_D --> LISTS_DIR["📁 lists<br/>Likes"]
-    APP_D --> ADMIN_DIR["📁 admin<br/>Admin panel"]
-    APP_D --> ACTIONS_DIR["📁 actions<br/>Server Actions"]
-    APP_D --> API_DIR["📁 api<br/>API Routes"]
-    APP_D --> LAYOUT_FILE["📄 layout.tsx<br/>Layout global"]
-    APP_D --> PAGE_FILE["📄 page.tsx<br/>Home page"]
-    APP_D --> GLOBALS_FILE["📄 globals.css<br/>Styles globaux"]
-    
-    LIB_D --> LIB_PRISMA["📄 prisma.ts<br/>Client DB"]
-    LIB_D --> LIB_CLOUD["📄 cloudinary.ts<br/>Config images"]
-    LIB_D --> LIB_PUSHER["📄 pusher.ts<br/>Config realtime"]
-    LIB_D --> LIB_MAIL["📄 mail.ts<br/>Service email"]
-    LIB_D --> LIB_TOKENS["📄 tokens.ts<br/>Gestion tokens"]
-    LIB_D --> LIB_UTIL["📄 util.ts<br/>Functions utils"]
-    LIB_D --> LIB_SCHEMAS["📁 schemas<br/>Validation Zod"]
-    
-    PRISMA_D --> SCHEMA_FILE["📄 schema.prisma<br/>Schéma BDD"]
-    PRISMA_D --> SEED_FILE["📄 seed.ts<br/>Données test"]
-    PRISMA_D --> MEMBERS_FILE["📄 membersData.ts<br/>Profils test"]
-    PRISMA_D --> MIGRATIONS_DIR["📁 migrations<br/>Historique SQL"]
-    
-    PUBLIC --> IMAGES_DIR["📁 images<br/>Photos test f1-f5, m1-m5"]
-    
-    style ROOT fill:#1f2937,stroke:#111827,stroke-width:4px,color:#fff
-    style SRC fill:#2563eb,stroke:#1e40af,stroke-width:3px,color:#fff
-    style APP_D fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
-    style LIB_D fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style PRISMA_D fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff
-    style AUTH_FILE fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff
-    style MIDDLEWARE_FILE fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
-```
+**Utilisez plutôt les diagrammes simplifiés ci-dessus :**
+- Architecture Globale (Vue Racine)
+- Dossier src/
+- Routes Authentification
+- Routes Membres
+- Server Actions
+- Services Externes
 
 ---
 
@@ -567,186 +520,172 @@ flowchart TD
 
 ### Feature: Authentification
 
+#### Configuration Auth
+
 ```mermaid
 flowchart TD
-    FEATURE["FEATURE: AUTHENTIFICATION"]
+    AUTH_CFG["📄 auth.config.ts<br/>━━━━━━━━━━━━━<br/>PROVIDERS OAUTH<br/>Credentials, Google, GitHub"]
+    AUTH_MAIN["📄 auth.ts<br/>━━━━━━━━━━━━━<br/>CONFIG NEXTAUTH<br/>Callbacks, Adapter, Session"]
+    MIDDLE["📄 middleware.ts<br/>━━━━━━━━━━━━━<br/>PROTECTION ROUTES<br/>Session, Profil, Rôle"]
     
-    FEATURE --> CONFIG_AUTH["📄 src/auth.config.ts<br/>━━━━━━━━━━━<br/>Providers (Credentials, Google, GitHub)"]
+    style AUTH_CFG fill:#7c3aed,stroke:#6d28d9,stroke-width:6px,color:#fff,font-size:18px
+    style AUTH_MAIN fill:#7c3aed,stroke:#6d28d9,stroke-width:6px,color:#fff,font-size:18px
+    style MIDDLE fill:#dc2626,stroke:#b91c1c,stroke-width:6px,color:#fff,font-size:18px
+```
+
+#### Actions et Pages Auth
+
+```mermaid
+flowchart TD
+    ACTIONS_A["📄 authActions.ts<br/>━━━━━━━━━━━━━<br/>SERVER ACTIONS<br/>register, login, verify, reset"]
+    LOGIN_P["📁 app/auth/login<br/>━━━━━━━━━━━━━<br/>PAGE LOGIN<br/>LoginForm + SocialLogin"]
+    REGISTER_P["📁 app/auth/register<br/>━━━━━━━━━━━━━<br/>PAGE REGISTER<br/>RegisterForm + Details"]
     
-    FEATURE --> MAIN_AUTH["📄 src/auth.ts<br/>━━━━━━━━━━━<br/>Configuration principale<br/>Callbacks, Adapter, Session"]
-    
-    FEATURE --> MIDDLEWARE_A["📄 src/middleware.ts<br/>━━━━━━━━━━━<br/>Protection routes<br/>Vérif session, profil, rôle"]
-    
-    FEATURE --> ROUTES_A["📄 src/routes.ts<br/>━━━━━━━━━━━<br/>authRoutes, publicRoutes<br/>DEFAULT_LOGIN_REDIRECT"]
-    
-    FEATURE --> ACTIONS_AUTH["📄 src/app/actions/authActions.ts<br/>━━━━━━━━━━━<br/>✓ registerUser<br/>✓ signInUser<br/>✓ verifyEmail<br/>✓ resetPassword"]
-    
-    FEATURE --> LOGIN_PAGE["📁 src/app/auth/login/<br/>━━━━━━━━━━━<br/>LoginForm.tsx<br/>SocialLogin.tsx<br/>page.tsx"]
-    
-    FEATURE --> REGISTER_PAGE["📁 src/app/auth/register/<br/>━━━━━━━━━━━<br/>RegisterForm.tsx<br/>UserDetailsForm.tsx<br/>page.tsx"]
-    
-    FEATURE --> SCHEMAS_AUTH["📁 src/lib/schemas/<br/>━━━━━━━━━━━<br/>loginSchema.ts<br/>registerSchema.ts<br/>forgotPasswordSchema.ts"]
-    
-    FEATURE --> TYPES_AUTH["📄 src/types/next-auth.d.ts<br/>━━━━━━━━━━━<br/>Extension types NextAuth<br/>profileComplete, role"]
-    
-    style FEATURE fill:#1f2937,stroke:#111827,stroke-width:4px,color:#fff
-    style MAIN_AUTH fill:#7c3aed,stroke:#6d28d9,stroke-width:3px,color:#fff
-    style MIDDLEWARE_A fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
-    style ACTIONS_AUTH fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style LOGIN_PAGE fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
-    style SCHEMAS_AUTH fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
+    style ACTIONS_A fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:18px
+    style LOGIN_P fill:#2563eb,stroke:#1e40af,stroke-width:6px,color:#fff,font-size:18px
+    style REGISTER_P fill:#2563eb,stroke:#1e40af,stroke-width:6px,color:#fff,font-size:18px
 ```
 
 ---
 
 ### Feature: Messagerie Temps Réel
 
+#### Service et Actions
+
 ```mermaid
 flowchart TD
-    FEATURE_MSG["FEATURE: MESSAGERIE"]
+    PUSHER_L["📄 lib/pusher.ts<br/>━━━━━━━━━━━━━<br/>PUSHER CLIENT/SERVER<br/>Cluster: mt1<br/>Private channels"]
+    MSG_ACT["📄 actions/messageActions.ts<br/>━━━━━━━━━━━━━<br/>CREATE MESSAGE<br/>Prisma + Pusher trigger"]
+    API_PUSHER["📄 api/pusher-auth<br/>━━━━━━━━━━━━━<br/>AUTHORIZE PUSHER<br/>Private channels auth"]
     
-    FEATURE_MSG --> PUSHER_LIB["📄 src/lib/pusher.ts<br/>━━━━━━━━━━━<br/>✓ pusherServer instance<br/>✓ pusherClient instance<br/>✓ Cluster: mt1<br/>✓ Private channels"]
+    style PUSHER_L fill:#6b21a8,stroke:#581c87,stroke-width:6px,color:#fff,font-size:18px
+    style MSG_ACT fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:18px
+    style API_PUSHER fill:#059669,stroke:#047857,stroke-width:6px,color:#fff,font-size:18px
+```
+
+#### Hooks Messagerie
+
+```mermaid
+flowchart TD
+    HOOK_MSG["📄 useMessages.tsx<br/>━━━━━━━━━━━━━<br/>HOOK MESSAGERIE<br/>Subscribe Pusher<br/>État local"]
+    STORE_MSG["📄 useMessageStore.ts<br/>━━━━━━━━━━━━━<br/>STORE ZUSTAND<br/>Messages non lus<br/>State global"]
     
-    FEATURE_MSG --> MSG_ACTIONS["📄 src/app/actions/messageActions.ts<br/>━━━━━━━━━━━<br/>✓ createMessage → Prisma + Pusher<br/>✓ getMessageThread<br/>✓ deleteMessage<br/>✓ markMessageAsRead"]
+    style HOOK_MSG fill:#059669,stroke:#047857,stroke-width:6px,color:#fff,font-size:18px
+    style STORE_MSG fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:18px
+```
+
+#### Pages Chat
+
+```mermaid
+flowchart TD
+    CHAT["📁 members/[userId]/chat<br/>━━━━━━━━━━━━━<br/>CHAT 1-to-1<br/>ChatForm + MessageList"]
+    MESSAGES_P["📁 messages<br/>━━━━━━━━━━━━━<br/>LISTE CONVERSATIONS<br/>MessageTable"]
     
-    FEATURE_MSG --> MSG_HOOK["📄 src/hooks/useMessages.tsx<br/>━━━━━━━━━━━<br/>✓ Subscribe Pusher<br/>✓ État messages local<br/>✓ Pagination<br/>✓ Optimistic updates"]
-    
-    FEATURE_MSG --> MSG_STORE["📄 src/hooks/useMessageStore.ts<br/>━━━━━━━━━━━<br/>✓ Zustand store<br/>✓ Messages non lus<br/>✓ Add/remove messages<br/>✓ State global"]
-    
-    FEATURE_MSG --> PRESENCE_H["📄 src/hooks/usePresenceChannel.ts<br/>━━━━━━━━━━━<br/>✓ Présence membres<br/>✓ Track online/offline<br/>✓ Pusher presence channel"]
-    
-    FEATURE_MSG --> PRESENCE_S["📄 src/hooks/usePresenceStore.ts<br/>━━━━━━━━━━━<br/>✓ Map membres online<br/>✓ Add/remove membres<br/>✓ Check isOnline"]
-    
-    FEATURE_MSG --> NOTIF_H["📄 src/hooks/useNotificationChannel.ts<br/>━━━━━━━━━━━<br/>✓ Notifications toasts<br/>✓ Nouveau like → toast<br/>✓ Nouveau message → toast<br/>✓ Sons"]
-    
-    FEATURE_MSG --> CHAT_PAGE["📁 src/app/members/[userId]/chat/<br/>━━━━━━━━━━━<br/>ChatForm.tsx<br/>MessageList.tsx<br/>MessageBox.tsx<br/>page.tsx"]
-    
-    FEATURE_MSG --> MSG_PAGE["📁 src/app/messages/<br/>━━━━━━━━━━━<br/>MessageTable.tsx<br/>MessageSidebar.tsx<br/>page.tsx"]
-    
-    FEATURE_MSG --> PUSHER_API["📄 src/app/api/pusher-auth/route.ts<br/>━━━━━━━━━━━<br/>Authentification Pusher<br/>Authorize private channels"]
-    
-    style FEATURE_MSG fill:#1f2937,stroke:#111827,stroke-width:4px,color:#fff
-    style PUSHER_LIB fill:#6b21a8,stroke:#581c87,stroke-width:3px,color:#fff
-    style MSG_ACTIONS fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style MSG_HOOK fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
-    style MSG_STORE fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style CHAT_PAGE fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
+    style CHAT fill:#2563eb,stroke:#1e40af,stroke-width:6px,color:#fff,font-size:18px
+    style MESSAGES_P fill:#2563eb,stroke:#1e40af,stroke-width:6px,color:#fff,font-size:18px
 ```
 
 ---
 
 ### Feature: Upload et Modération Photos
 
+#### Service Cloudinary
+
 ```mermaid
 flowchart TD
-    FEATURE_PHOTO["FEATURE: PHOTOS"]
+    CLOUD["📄 lib/cloudinary.ts<br/>━━━━━━━━━━━━━<br/>CONFIG CLOUDINARY<br/>cloud_name, api_key, secret"]
+    SIGN["📄 api/sign-image<br/>━━━━━━━━━━━━━<br/>SIGNATURE CLOUDINARY<br/>Pour mode Signed"]
     
-    FEATURE_PHOTO --> CLOUD_LIB["📄 src/lib/cloudinary.ts<br/>━━━━━━━━━━━<br/>✓ Configuration Cloudinary<br/>✓ cloud_name, api_key, secret<br/>✓ Export instance"]
+    style CLOUD fill:#1e40af,stroke:#1e3a8a,stroke-width:6px,color:#fff,font-size:18px
+    style SIGN fill:#059669,stroke:#047857,stroke-width:6px,color:#fff,font-size:18px
+```
+
+#### Composants Upload
+
+```mermaid
+flowchart TD
+    UPLOAD["📄 ImageUploadButton.tsx<br/>━━━━━━━━━━━━━<br/>WIDGET UPLOAD<br/>Preset: nextmatch<br/>Cloudinary"]
+    GALLERY["📄 MemberPhotos.tsx<br/>━━━━━━━━━━━━━<br/>GALERIE PHOTOS<br/>Star + Delete<br/>Awaiting approval"]
     
-    FEATURE_PHOTO --> UPLOAD_COMP["📄 src/components/ImageUploadButton.tsx<br/>━━━━━━━━━━━<br/>✓ CldUploadButton widget<br/>✓ Preset: nextmatch<br/>✓ signatureEndpoint<br/>✓ Callback onSuccess"]
+    style UPLOAD fill:#2563eb,stroke:#1e40af,stroke-width:6px,color:#fff,font-size:18px
+    style GALLERY fill:#2563eb,stroke:#1e40af,stroke-width:6px,color:#fff,font-size:18px
+```
+
+#### Actions Photos
+
+```mermaid
+flowchart TD
+    MEMBER_ACT["📄 memberActions.ts<br/>━━━━━━━━━━━━━<br/>ACTIONS MEMBRE<br/>addImage, setMain, delete<br/>isApproved: false"]
+    ADMIN_ACT["📄 adminActions.ts<br/>━━━━━━━━━━━━━<br/>ACTIONS ADMIN<br/>approvePhoto, rejectPhoto<br/>Modération"]
     
-    FEATURE_PHOTO --> SIGN_API["📄 src/app/api/sign-image/route.ts<br/>━━━━━━━━━━━<br/>✓ Génère signature Cloudinary<br/>✓ Pour mode Signed<br/>✓ Utilise CLOUDINARY_API_SECRET"]
-    
-    FEATURE_PHOTO --> MEMBER_PHOTOS["📄 src/components/MemberPhotos.tsx<br/>━━━━━━━━━━━<br/>✓ Galerie photos membre<br/>✓ StarButton (principale)<br/>✓ DeleteButton<br/>✓ Awaiting approval status"]
-    
-    FEATURE_PHOTO --> PHOTO_PAGE["📁 src/app/members/edit/photos/<br/>━━━━━━━━━━━<br/>MemberPhotoUpload.tsx<br/>page.tsx"]
-    
-    FEATURE_PHOTO --> MEMBER_ACTIONS_P["📄 memberActions.ts<br/>━━━━━━━━━━━<br/>✓ addImage<br/>✓ setMainImage<br/>✓ deleteImage<br/>→ INSERT Photo (isApproved: false)"]
-    
-    FEATURE_PHOTO --> ADMIN_ACTIONS_P["📄 adminActions.ts<br/>━━━━━━━━━━━<br/>✓ getUnapprovedPhotos<br/>✓ approvePhoto (isApproved: true)<br/>✓ rejectPhoto (DELETE)"]
-    
-    FEATURE_PHOTO --> ADMIN_PAGE["📁 src/app/admin/moderation/<br/>━━━━━━━━━━━<br/>page.tsx<br/>Liste photos à modérer"]
-    
-    FEATURE_PHOTO --> PHOTO_MODEL["📊 prisma/schema.prisma<br/>━━━━━━━━━━━<br/>Model Photo<br/>- id, url, publicId<br/>- isApproved: Boolean<br/>- memberId: FK"]
-    
-    style FEATURE_PHOTO fill:#1f2937,stroke:#111827,stroke-width:4px,color:#fff
-    style CLOUD_LIB fill:#1e40af,stroke:#1e3a8a,stroke-width:3px,color:#fff
-    style UPLOAD_COMP fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
-    style MEMBER_ACTIONS_P fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style ADMIN_ACTIONS_P fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
-    style ADMIN_PAGE fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
+    style MEMBER_ACT fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:18px
+    style ADMIN_ACT fill:#dc2626,stroke:#b91c1c,stroke-width:6px,color:#fff,font-size:18px
 ```
 
 ---
 
 ### Feature: Système de Likes
 
+#### Composant et Actions
+
 ```mermaid
 flowchart TD
-    FEATURE_LIKE["FEATURE: LIKES"]
+    LIKE_BTN["📄 LikeButton.tsx<br/>━━━━━━━━━━━━━<br/>BOUTON LIKE<br/>Coeur animation<br/>Optimistic update"]
+    LIKE_ACT["📄 likeActions.ts<br/>━━━━━━━━━━━━━<br/>SERVER ACTION<br/>toggleLikeMember<br/>Check match mutuel"]
+    LISTS["📁 app/lists<br/>━━━━━━━━━━━━━<br/>PAGE LISTES<br/>Liked, Liked by, Mutual"]
     
-    FEATURE_LIKE --> LIKE_BTN_C["📄 src/components/LikeButton.tsx<br/>━━━━━━━━━━━<br/>RÔLE: Bouton Like UI<br/>✓ Affiche coeur plein/vide<br/>✓ Animation au clic<br/>✓ Appelle toggleLikeMember<br/>✓ Optimistic update"]
-    
-    FEATURE_LIKE --> LIKE_ACT["📄 src/app/actions/likeActions.ts<br/>━━━━━━━━━━━<br/>RÔLE: Logique métier likes<br/>━━━━━━━━━━━<br/>✓ toggleLikeMember<br/>  → Check si like existe<br/>  → INSERT ou DELETE<br/>  → Check match mutuel<br/>✓ fetchCurrentUserLikeIds<br/>✓ fetchLikedMembers<br/>✓ getMutualLikes"]
-    
-    FEATURE_LIKE --> LIKE_MODEL["📊 prisma/schema.prisma<br/>━━━━━━━━━━━<br/>Model Like<br/>- sourceUserId: FK<br/>- targetUserId: FK<br/>- Clé composite [source, target]<br/>- Relations Member"]
-    
-    FEATURE_LIKE --> LISTS_PAGE["📁 src/app/lists/<br/>━━━━━━━━━━━<br/>ListsTab.tsx<br/>page.tsx<br/>━━━━━━━━━━━<br/>Affiche:<br/>- Members I liked<br/>- Members who liked me<br/>- Mutual matches"]
-    
-    FEATURE_LIKE --> NOTIF_MATCH["📄 useNotificationChannel.ts<br/>━━━━━━━━━━━<br/>RÔLE: Notification match<br/>✓ Écoute event 'like:new'<br/>✓ Si match mutuel → toast<br/>✓ Son de notification"]
-    
-    style FEATURE_LIKE fill:#1f2937,stroke:#111827,stroke-width:4px,color:#fff
-    style LIKE_BTN_C fill:#db2777,stroke:#be185d,stroke-width:3px,color:#fff
-    style LIKE_ACT fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style LIKE_MODEL fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff
-    style LISTS_PAGE fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
-    style NOTIF_MATCH fill:#db2777,stroke:#be185d,stroke-width:2px,color:#fff
+    style LIKE_BTN fill:#db2777,stroke:#be185d,stroke-width:6px,color:#fff,font-size:18px
+    style LIKE_ACT fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:18px
+    style LISTS fill:#2563eb,stroke:#1e40af,stroke-width:6px,color:#fff,font-size:18px
 ```
 
 ---
 
-## Tableau Récapitulatif - Fichiers Critiques
+## Fichiers les Plus Importants
 
-### Top 20 Fichiers les Plus Importants
+### Configuration (4 fichiers critiques)
 
 ```mermaid
 flowchart TD
-    subgraph "1. CONFIGURATION"
-        F1["📄 .env<br/>Variables secrètes"]
-        F2["📄 auth.ts<br/>NextAuth config"]
-        F3["📄 middleware.ts<br/>Protection routes"]
-        F4["📄 prisma/schema.prisma<br/>Schéma BDD"]
-    end
+    ENV["📄 .env<br/>━━━━━━━━━━━━━<br/>VARIABLES SECRÈTES<br/>DATABASE_URL, API Keys"]
+    AUTH["📄 auth.ts<br/>━━━━━━━━━━━━━<br/>CONFIG NEXTAUTH<br/>Session, Callbacks"]
+    MIDDLEWARE["📄 middleware.ts<br/>━━━━━━━━━━━━━<br/>PROTECTION ROUTES<br/>Auth, Role check"]
+    SCHEMA["📄 schema.prisma<br/>━━━━━━━━━━━━━<br/>SCHÉMA BDD<br/>7 Models"]
     
-    subgraph "2. BIBLIOTHÈQUES"
-        F5["📄 lib/prisma.ts<br/>Client DB"]
-        F6["📄 lib/pusher.ts<br/>Temps réel"]
-        F7["📄 lib/cloudinary.ts<br/>Images"]
-        F8["📄 lib/mail.ts<br/>Emails"]
-    end
+    style ENV fill:#dc2626,stroke:#b91c1c,stroke-width:6px,color:#fff,font-size:18px
+    style AUTH fill:#7c3aed,stroke:#6d28d9,stroke-width:6px,color:#fff,font-size:18px
+    style MIDDLEWARE fill:#dc2626,stroke:#b91c1c,stroke-width:6px,color:#fff,font-size:18px
+    style SCHEMA fill:#7c3aed,stroke:#6d28d9,stroke-width:6px,color:#fff,font-size:18px
+```
+
+### Bibliothèques (4 services)
+
+```mermaid
+flowchart LR
+    PRISMA_L["📄 lib/prisma.ts<br/>━━━━━━━━━━━━━<br/>CLIENT DATABASE"]
+    PUSHER_L["📄 lib/pusher.ts<br/>━━━━━━━━━━━━━<br/>TEMPS RÉEL"]
+    CLOUD_L["📄 lib/cloudinary.ts<br/>━━━━━━━━━━━━━<br/>IMAGES"]
+    MAIL_L["📄 lib/mail.ts<br/>━━━━━━━━━━━━━<br/>EMAILS"]
     
-    subgraph "3. SERVER ACTIONS"
-        F9["📄 authActions.ts<br/>Actions auth"]
-        F10["📄 memberActions.ts<br/>Actions profils"]
-        F11["📄 messageActions.ts<br/>Actions messages"]
-        F12["📄 likeActions.ts<br/>Actions likes"]
-    end
+    style PRISMA_L fill:#7c3aed,stroke:#6d28d9,stroke-width:6px,color:#fff,font-size:18px
+    style PUSHER_L fill:#6b21a8,stroke:#581c87,stroke-width:6px,color:#fff,font-size:18px
+    style CLOUD_L fill:#1e40af,stroke:#1e3a8a,stroke-width:6px,color:#fff,font-size:18px
+    style MAIL_L fill:#dc2626,stroke:#b91c1c,stroke-width:6px,color:#fff,font-size:18px
+```
+
+### Server Actions (4 actions principales)
+
+```mermaid
+flowchart LR
+    AUTH_ACT["📄 authActions.ts<br/>━━━━━━━━━━━━━<br/>AUTH"]
+    MEMBER_ACT["📄 memberActions.ts<br/>━━━━━━━━━━━━━<br/>PROFILS"]
+    MSG_ACT["📄 messageActions.ts<br/>━━━━━━━━━━━━━<br/>MESSAGES"]
+    LIKE_ACT["📄 likeActions.ts<br/>━━━━━━━━━━━━━<br/>LIKES"]
     
-    subgraph "4. HOOKS"
-        F13["📄 useMessages.tsx<br/>Messagerie"]
-        F14["📄 usePresenceChannel.ts<br/>Présence online"]
-        F15["📄 useFilterStore.ts<br/>Filtres"]
-    end
-    
-    subgraph "5. COMPOSANTS"
-        F16["📄 MemberCard.tsx<br/>Carte profil"]
-        F17["📄 LikeButton.tsx<br/>Bouton like"]
-        F18["📄 ImageUploadButton.tsx<br/>Upload photo"]
-    end
-    
-    subgraph "6. PAGES"
-        F19["📄 app/members/page.tsx<br/>Liste membres"]
-        F20["📄 app/layout.tsx<br/>Layout global"]
-    end
-    
-    style F1 fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
-    style F2 fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff
-    style F3 fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
-    style F4 fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff
-    style F9 fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style F10 fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style F11 fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
-    style F12 fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    style AUTH_ACT fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:18px
+    style MEMBER_ACT fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:18px
+    style MSG_ACT fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:18px
+    style LIKE_ACT fill:#d97706,stroke:#b45309,stroke-width:6px,color:#fff,font-size:18px
 ```
 
 ---
