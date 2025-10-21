@@ -1,0 +1,47 @@
+# ============================================
+# SUPABASE DATABASE
+# ============================================
+# IMPORTANT: Utilisez la connexion DIRECTE (port 5432) pour les migrations
+# Ensuite, utilisez la connexion POOLÉE (port 6543) pour l'application
+
+# Connection directe (Pour les migrations Prisma)
+DATABASE_URL="postgresql://postgres.mnscvnbymurtjxypafoz:%407V%40_np_%2BBHtKP%40@aws-1-us-east-2.pooler.supabase.com:5432/postgres"
+
+# APRÈS les migrations, décommentez celle-ci et commentez celle du dessus
+# DATABASE_URL="postgresql://postgres.mnscvnbymurtjxypafoz:%407V%40_np_%2BBHtKP%40@aws-1-us-east-2.pooler.supabase.com:6543/postgres?pgbouncer=true"
+
+# ============================================
+# SUPABASE CLIENT (Pour Realtime si migration)
+# ============================================
+NEXT_PUBLIC_SUPABASE_URL=https://mnscvnbymurtjxypafoz.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1uc2N2bmJ5bXVydGp4eXBhZm96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEwNDg1NzIsImV4cCI6MjA3NjYyNDU3Mn0.mKbBD-PuGx1tsf24TxTo003JYuUbYgSnFhmxRDDc5po
+
+# ============================================
+# NEXTAUTH (Authentification)
+# ============================================
+# IMPORTANT: Remplacez par votre vraie clé AUTH_SECRET
+# Pour générer: node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+AUTH_SECRET="REMPLACEZ_PAR_VOTRE_CLE_AUTH_SECRET"
+NEXT_PUBLIC_BASE_URL="http://localhost:3000"
+
+# ============================================
+# CLOUDINARY (Stockage d'images)
+# ============================================
+# Remplacez par vos vraies valeurs Cloudinary
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="dgxtwhibj"
+NEXT_PUBLIC_CLOUDINARY_API_KEY="VOTRE_API_KEY"
+CLOUDINARY_API_SECRET="VOTRE_API_SECRET"
+
+# ============================================
+# PUSHER (Messagerie temps réel)
+# ============================================
+PUSHER_APP_ID="131729"
+NEXT_PUBLIC_PUSHER_APP_KEY="318b4c077abe583f2a04"
+PUSHER_SECRET="25e4ba58a50a61d46c98"
+
+# ============================================
+# RESEND (Envoi d'emails)
+# ============================================
+# Remplacez par votre vraie clé Resend
+RESEND_API_KEY="re_6aWdAPB8_BFaNkhhaQoBQcd7wHfzpSwgB"
+
