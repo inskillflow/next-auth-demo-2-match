@@ -82,6 +82,7 @@ flowchart TB
 
 ```mermaid
 sequenceDiagram
+    autonumber
     actor U as Utilisateur
     participant F as RegisterForm (Client)
     participant SA as Server Action registerUser
@@ -91,68 +92,52 @@ sequenceDiagram
     participant DB as PostgreSQL (Supabase)
     participant R as Resend
     
-    rect rgb(33, 150, 243)
-        Note over U,F: ÉTAPE 1 : Remplissage Formulaire
-        U->>F: Remplit name, email, password
-        U->>F: Remplit gender, dateOfBirth, city, etc.
-        U->>F: Clique "Submit"
-    end
+    Note over U,F: === ÉTAPE 1 : Remplissage Formulaire ===
+    U->>F: Remplit name, email, password
+    U->>F: Remplit gender, dateOfBirth, city, etc.
+    U->>F: Clique "Submit"
     
-    rect rgb(255, 152, 0)
-        Note over F,SA: ÉTAPE 2 : Envoi au Serveur
-        F->>SA: POST registerUser(data)
-        Note over SA: data = name, email, password, gender, dateOfBirth, city, country, description
-    end
+    Note over F,SA: === ÉTAPE 2 : Envoi au Serveur ===
+    F->>SA: POST registerUser(data)
+    Note right of SA: data contient:<br/>name, email, password,<br/>gender, dateOfBirth,<br/>city, country, description
     
-    rect rgb(255, 193, 7)
-        Note over SA,Z: ÉTAPE 3 : Validation
-        SA->>Z: combinedRegisterSchema.safeParse(data)
-        Z->>Z: Vérifie email format
-        Z->>Z: Vérifie password >= 6 chars
-        Z->>Z: Vérifie age >= 18 ans
-        Z-->>SA: validated.success = true
-    end
+    Note over SA,Z: === ÉTAPE 3 : Validation ===
+    SA->>Z: combinedRegisterSchema.safeParse(data)
+    Z->>Z: Vérifie email format
+    Z->>Z: Vérifie password >= 6 chars
+    Z->>Z: Vérifie age >= 18 ans
+    Z-->>SA: validated.success = true
     
-    rect rgb(255, 87, 34)
-        Note over SA,B: ÉTAPE 4 : Hash Password
-        SA->>B: bcrypt.hash(password, 10)
-        B->>B: Génère salt
-        B->>B: Hash avec salt
-        B-->>SA: hashedPassword
-    end
+    Note over SA,B: === ÉTAPE 4 : Hash Password ===
+    SA->>B: bcrypt.hash(password, 10)
+    B->>B: Génère salt
+    B->>B: Hash avec salt
+    B-->>SA: hashedPassword
     
-    rect rgb(103, 58, 183)
-        Note over SA,DB: ÉTAPE 5 : Vérification Email Unique
-        SA->>P: prisma.user.findUnique where email
-        P->>DB: SELECT * FROM User WHERE email = ?
-        DB-->>P: null (n'existe pas)
-        P-->>SA: null
-    end
+    Note over SA,DB: === ÉTAPE 5 : Vérification Email Unique ===
+    SA->>P: prisma.user.findUnique where email
+    P->>DB: SELECT * FROM User WHERE email = ?
+    DB-->>P: null (n'existe pas)
+    P-->>SA: null
     
-    rect rgb(76, 175, 80)
-        Note over SA,DB: ÉTAPE 6 : Création User + Member
-        SA->>P: prisma.user.create data + member.create
-        P->>DB: BEGIN TRANSACTION
-        P->>DB: INSERT INTO User VALUES
-        P->>DB: INSERT INTO Member VALUES
-        P->>DB: COMMIT
-        DB-->>P: User + Member créés
-        P-->>SA: user object
-    end
+    Note over SA,DB: === ÉTAPE 6 : Création User + Member ===
+    SA->>P: prisma.user.create data + member.create
+    P->>DB: BEGIN TRANSACTION
+    P->>DB: INSERT INTO User VALUES
+    P->>DB: INSERT INTO Member VALUES
+    P->>DB: COMMIT
+    DB-->>P: User + Member créés
+    P-->>SA: user object
     
-    rect rgb(233, 30, 99)
-        Note over SA,R: ÉTAPE 7 : Email Vérification
-        SA->>SA: generateToken(email, VERIFICATION)
-        SA->>DB: INSERT INTO Token
-        SA->>R: sendVerificationEmail(email, token)
-        R->>U: Email avec lien
-    end
+    Note over SA,R: === ÉTAPE 7 : Email Vérification ===
+    SA->>SA: generateToken(email, VERIFICATION)
+    SA->>DB: INSERT INTO Token
+    SA->>R: sendVerificationEmail(email, token)
+    R->>U: Email avec lien
     
-    rect rgb(0, 150, 136)
-        Note over SA,F: ÉTAPE 8 : Réponse
-        SA-->>F: status: success, data: user
-        F->>F: router.push('/register/success')
-    end
+    Note over SA,F: === ÉTAPE 8 : Réponse ===
+    SA-->>F: status: success, data: user
+    F->>F: router.push('/register/success')
 ```
 
 ---
