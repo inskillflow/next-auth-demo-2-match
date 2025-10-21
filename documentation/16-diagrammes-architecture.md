@@ -762,45 +762,45 @@ graph LR
 flowchart TD
     Start([Utilisateur arrive sur l'app]) --> Login{Connecté ?}
     
-    Login -->|Non| LoginPage[Page /login]
+    Login -->|Non| LoginPage["Page login"]
     LoginPage --> Auth[Authentification]
-    Auth --> Session[Session créée JWT]
+    Auth --> Session["Session créée JWT"]
     
-    Login -->|Oui| CheckProfile{Profil<br/>complet ?}
+    Login -->|Oui| CheckProfile{"Profil complet ?"}
     
-    CheckProfile -->|Non| CompleteProfile[/complete-profile]
-    CompleteProfile --> CreateMember[Créer Member]
+    CheckProfile -->|Non| CompleteProfile["Page complete-profile"]
+    CompleteProfile --> CreateMember["Créer Member"]
     CreateMember --> CheckProfile
     
-    CheckProfile -->|Oui| HomePage[Page d'accueil]
+    CheckProfile -->|Oui| HomePage["Page d'accueil"]
     Session --> HomePage
     
-    HomePage --> Matches[/members]
-    Matches --> LoadMembers[getMembers<br/>Server Action]
+    HomePage --> Matches["Page members"]
+    Matches --> LoadMembers["getMembers Server Action"]
     LoadMembers --> FilterMembers{Filtres actifs ?}
     
-    FilterMembers -->|Oui| QueryFiltered[Query avec WHERE]
-    FilterMembers -->|Non| QueryAll[Query tous membres]
+    FilterMembers -->|Oui| QueryFiltered["Query avec WHERE"]
+    FilterMembers -->|Non| QueryAll["Query tous membres"]
     
-    QueryFiltered --> DisplayCards[Affiche Member Cards]
+    QueryFiltered --> DisplayCards["Affiche Member Cards"]
     QueryAll --> DisplayCards
     
-    DisplayCards --> UserAction{Action<br/>utilisateur ?}
+    DisplayCards --> UserAction{"Action utilisateur ?"}
     
-    UserAction -->|❤️ Like| LikeAction[toggleLikeMember]
-    UserAction -->|💬 Message| MessagePage[/members/userId/chat]
-    UserAction -->|👤 View| ProfilePage[/members/userId]
+    UserAction -->|Like| LikeAction[toggleLikeMember]
+    UserAction -->|Message| MessagePage["Page chat"]
+    UserAction -->|View| ProfilePage["Page profil"]
     
-    LikeAction --> CheckMatch{Match<br/>mutuel ?}
-    CheckMatch -->|Oui| Notification[Toast "It's a match!"]
-    CheckMatch -->|Non| UpdateUI[Update UI seulement]
+    LikeAction --> CheckMatch{"Match mutuel ?"}
+    CheckMatch -->|Oui| Notification["Toast Match"]
+    CheckMatch -->|Non| UpdateUI["Update UI seulement"]
     
     MessagePage --> LoadMessages[getMessagesByUser]
-    LoadMessages --> DisplayMessages[Affiche messages]
-    DisplayMessages --> RealtimeListener[Écoute Pusher/Supabase]
+    LoadMessages --> DisplayMessages["Affiche messages"]
+    DisplayMessages --> RealtimeListener["Écoute temps réel"]
     
-    RealtimeListener --> NewMessage{Nouveau<br/>message ?}
-    NewMessage -->|Oui| UpdateMessages[Ajoute à la liste]
+    RealtimeListener --> NewMessage{"Nouveau message ?"}
+    NewMessage -->|Oui| UpdateMessages["Ajoute à la liste"]
     NewMessage -->|Non| RealtimeListener
     
     UpdateMessages --> DisplayMessages
@@ -821,34 +821,34 @@ flowchart TD
 flowchart TD
     Request[Requête HTTP] --> Middleware[middleware.ts]
     
-    Middleware --> CheckAuth{Session<br/>valide ?}
+    Middleware --> CheckAuth{"Session valide ?"}
     
-    CheckAuth -->|Non| CheckRoute{Route<br/>publique ?}
+    CheckAuth -->|Non| CheckRoute{"Route publique ?"}
     
     CheckRoute -->|Oui| AllowPublic[Autoriser]
-    CheckRoute -->|Non| RedirectLogin[Redirect /login]
+    CheckRoute -->|Non| RedirectLogin["Redirect login"]
     
-    CheckAuth -->|Oui| CheckComplete{Profil<br/>complet ?}
+    CheckAuth -->|Oui| CheckComplete{"Profil complet ?"}
     
-    CheckComplete -->|Non| CheckNeedProfile{Route nécessite<br/>profil ?}
+    CheckComplete -->|Non| CheckNeedProfile{"Route nécessite profil ?"}
     
-    CheckNeedProfile -->|Oui| RedirectComplete[Redirect /complete-profile]
+    CheckNeedProfile -->|Oui| RedirectComplete["Redirect complete-profile"]
     CheckNeedProfile -->|Non| Allow[Autoriser]
     
-    CheckComplete -->|Oui| CheckRole{Rôle<br/>requis ?}
+    CheckComplete -->|Oui| CheckRole{"Rôle requis ?"}
     
-    CheckRole -->|Admin| IsAdmin{User =<br/>Admin ?}
+    CheckRole -->|Admin| IsAdmin{"User Admin ?"}
     CheckRole -->|Member| AllowMember[Autoriser]
     
-    IsAdmin -->|Oui| AllowAdmin[Autoriser /admin]
-    IsAdmin -->|Non| Forbidden[403 Forbidden]
+    IsAdmin -->|Oui| AllowAdmin["Autoriser admin"]
+    IsAdmin -->|Non| Forbidden["403 Forbidden"]
     
-    AllowPublic --> Page[Render Page]
+    AllowPublic --> Page["Render Page"]
     Allow --> Page
     AllowMember --> Page
     AllowAdmin --> Page
-    RedirectLogin --> LoginPage[/login]
-    RedirectComplete --> CompletePage[/complete-profile]
+    RedirectLogin --> LoginPage["Page Login"]
+    RedirectComplete --> CompletePage["Page Complete Profile"]
     
     style Middleware fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
     style CheckAuth fill:#db2777,stroke:#be185d,stroke-width:2px,color:#fff
@@ -1270,33 +1270,46 @@ sequenceDiagram
 ### Principes de Design
 
 ```mermaid
-mindmap
-  root((Next Match<br/>Architecture))
-    Performance
-      Server Components
-      Caching agressif
-      Optimistic Updates
-      Image Optimization
-    Sécurité
-      Middleware Auth
-      Input Validation
-      SQL Injection Protection
-      CSRF Protection
-    Scalabilité
-      Serverless Functions
-      CDN Global
-      Database Pooling
-      Edge Computing
-    Expérience Dev
-      TypeScript Strict
-      Prisma Type Safety
-      Hot Reload
-      Error Boundaries
-    Expérience User
-      Temps Réel
-      Feedback Immédiat
-      Progressive Enhancement
-      Responsive Design
+graph TB
+    Root["Next Match Architecture"]
+    
+    Root --> Perf[Performance]
+    Root --> Secu[Sécurité]
+    Root --> Scale[Scalabilité]
+    Root --> DevXP[Expérience Dev]
+    Root --> UserXP[Expérience User]
+    
+    Perf --> P1["Server Components"]
+    Perf --> P2["Caching agressif"]
+    Perf --> P3["Optimistic Updates"]
+    Perf --> P4["Image Optimization"]
+    
+    Secu --> S1["Middleware Auth"]
+    Secu --> S2["Input Validation"]
+    Secu --> S3["SQL Injection Protection"]
+    Secu --> S4["CSRF Protection"]
+    
+    Scale --> SC1["Serverless Functions"]
+    Scale --> SC2["CDN Global"]
+    Scale --> SC3["Database Pooling"]
+    Scale --> SC4["Edge Computing"]
+    
+    DevXP --> D1["TypeScript Strict"]
+    DevXP --> D2["Prisma Type Safety"]
+    DevXP --> D3["Hot Reload"]
+    DevXP --> D4["Error Boundaries"]
+    
+    UserXP --> U1["Temps Réel"]
+    UserXP --> U2["Feedback Immédiat"]
+    UserXP --> U3["Progressive Enhancement"]
+    UserXP --> U4["Responsive Design"]
+    
+    style Root fill:#1f2937,stroke:#111827,stroke-width:3px,color:#fff
+    style Perf fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
+    style Secu fill:#dc2626,stroke:#b91c1c,stroke-width:2px,color:#fff
+    style Scale fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
+    style DevXP fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
+    style UserXP fill:#db2777,stroke:#be185d,stroke-width:2px,color:#fff
 ```
 
 ---
@@ -1378,30 +1391,34 @@ graph TB
 ### Feature : Système de Filtres
 
 ```mermaid
-flowchart LR
-    User[Utilisateur] -->|Change filter| UI[Filter UI]
+flowchart TD
+    User[Utilisateur]
     
-    UI -->|Update| Store[useFilterStore<br/>Zustand]
+    User -->|Change filter| UI["Filter UI"]
     
-    Store -->|Sync| URL[URL Search Params<br/>?gender=female&age=18-100]
+    UI -->|Update| Store["useFilterStore Zustand"]
     
-    URL -->|Trigger| ServerComponent[MembersPage<br/>Server Component]
+    Store -->|Sync| URL["URL Search Params<br/>gender=female&age=18-100"]
     
-    ServerComponent -->|Call| Action[getMembers<br/>with filters]
+    URL -->|Trigger| ServerComponent["MembersPage<br/>Server Component"]
     
-    Action -->|Build query| Prisma[Prisma Query Builder]
+    ServerComponent -->|Call| Action["getMembers<br/>with filters"]
     
-    Prisma -->|Execute| DB[(Database)]
+    Action -->|Build query| Prisma["Prisma Query Builder"]
     
-    DB -->|Results| Transform[Transform data<br/>mappings.ts]
+    Prisma -->|Execute| DB[("Database")]
     
-    Transform -->|Return| Display[Display Members]
+    DB -->|Results| Transform["Transform data<br/>mappings.ts"]
     
-    Display -->|Render| User
+    Transform -->|Return| Display["Display Members"]
+    
+    Display -->|Render| UserDisplay["Affichage Utilisateur"]
     
     style Store fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
     style DB fill:#2563eb,stroke:#1e40af,stroke-width:2px,color:#fff
     style Prisma fill:#1f2937,stroke:#111827,stroke-width:2px,color:#fff
+    style ServerComponent fill:#059669,stroke:#047857,stroke-width:2px,color:#fff
+    style Action fill:#d97706,stroke:#b45309,stroke-width:2px,color:#fff
 ```
 
 ---
